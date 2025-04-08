@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>K-12 Mental Health Tech Navigator Survey</title>
+  <style>
+    /* Gradient background */
+    body {
+      background: linear-gradient(to top, #fff, #4682B4, #a8bace); /* Light blue to darker blue */
+      font-family: Arial, Helvetica, sans-serif;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* Full viewport height */
+    }
+
+    /* Centered survey container */
+    .survey-container {
+      background-color: #fff; /* White background for the form */
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+      padding: 20px;
+      width: 80%;
+      max-width: 600px;
+      text-align: left;
+      overflow-y: auto; /* Make the form scrollable */
+      max-height: 90vh; /* Limit the height to 90% of the viewport */
+    }
+
+    .survey-container h1 {
+      text-align: center;
+      color: black; /* Black text for the title */
+      margin-top: 0;
+    }
+
+    .question-block {
+      margin-bottom: 1em;
+      padding: 1em;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9; /* Light gray background for question blocks */
+      border-radius: 5px;
+    }
+
+    .question-block p {
+      font-size: 13px; /* Font size for questions */
+      margin-bottom: 0.5em;
+      color: black; /* Black text for questions */
+    }
+
+    .question-block label {
+      font-size: 13px; /* Font size for answers */
+      display: block;
+      margin-bottom: 0.5em;
+      color: black; /* Black text for answers */
+    }
+
+    .question-block input[type="text"] {
+      width: 100%; /* Full width for input fields */
+      padding: 8px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .question-block input[type="text"]::placeholder {
+      font-size: 14px; /* Make placeholder text larger */
+      color: #888; /* Gray placeholder text */
+    }
+
+    .submit-button {
+      background-color: #226ab6; /* Blue button */
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 14px;
+      cursor: pointer;
+      border-radius: 5px;
+      display: block;
+      margin: 20px auto 0; /* Center the button */
+    }
+
+    .submit-button:hover {
+      background-color: #0056b3; /* Darker blue on hover */
+    }
+
+    /* Privacy policy text */
+    p {
+      font-size: 12px;
+      color: gray;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    a {
+      color: rgb(0, 85, 255);
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="survey-container">
+    <h1>K-12 Mental Health Tech Navigator Survey</h1>
+
+    <form method="POST">
+      {% csrf_token %}
+
+      <!-- TOP container for Q1 and dynamically added follow-up questions -->
+      <div id="top-container"></div>
+
+      <!-- BOTTOM container for Q4, Q5, Q6, Q7, Q8 (always shown) -->
+      <div id="bottom-container"></div>
+
+      <!-- Add the privacy policy text before the submit button -->
+      <p>
+        By sharing, the user consents to the collection and use of their personal data in accordance with the 
+        <a href="https://www.k12mentalhealthtech.org/privacy-policy">privacy policy</a>.
+      </p>
+
+      <button class="submit-button" type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    // Parse survey data passed from the Django view
+    const surveyData = JSON.parse('{{ survey_data_json|safe }}');
+    console.log("Parsed survey data:", surveyData);
+
+    // Separate questions into multiple-choice and open-ended
+    const allQuestions = surveyData.questions;
+    const openEndedQuestions = surveyData.openEndedQuestions;
+
+    // Create maps for quick lookup by question ID
+    const questionMap = {};
+    allQuestions.forEach(q => {
+      questionMap[q.id] = q;
+    });
+
+    const openEndedMap = {};
+    openEndedQuestions.forEach(q => {
+      openEndedMap[q.id] = q;
+    });
+
+    // DOM references
+    const topContainer = document.getElementById('top-container');
+    const bottomContainer = document.getElementById('bottom-container');
+
+    // Function to create a question block for multiple-choice questions
+    function createMultipleChoiceBlock(question) {
+      const block = document.createElement('div');
+      block.classList.add('question-block');
+      block.id = question.id;
+
+      const p = document.createElement('p');
+      p.innerHTML = `<strong>${question.text}</strong>`;
+      block.appendChild(p);
+
+      question.answers.forEach(answer => {
+        const label = document.createElement('label');
+        label.style.display = 'block';
+
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = question.id;
+        input.value = answer.text;
+
+        label.appendChild(input);
+        label.appendChild(document.createTextNode(' ' + answer.text));
+        block.appendChild(label);
+      });
+
+      return block;
+    }
+
+    // Function to create a question block for open-ended questions
+    function createOpenEndedBlock(question) {
+      const block = document.createElement('div');
+      block.classList.add('question-block');
+      block.id = question.id;
+
+      const p = document.createElement('p');
+      p.innerHTML = `<strong>${question.text}</strong>`;
+      block.appendChild(p);
+
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.name = question.id;
+      input.placeholder = question.placeholder || "Enter your response here..."; // Set placeholder
+      input.style.width = '100%';
+      block.appendChild(input);
+
+      return block;
+    }
+
+    // Function to show follow-up questions
+    function showFollowUpQuestions(followUpQuestionIds) {
+      followUpQuestionIds.forEach(questionId => {
+        // Check if the question is already displayed
+        if (!document.getElementById(questionId)) {
+          const def = questionMap[questionId];
+          if (def) {
+            const block = createMultipleChoiceBlock(def);
+            topContainer.appendChild(block);
+
+            // Attach event listeners for follow-up logic
+            block.querySelectorAll('input[type="radio"]').forEach(radio => {
+              radio.addEventListener('change', event => {
+                const chosenText = event.target.value;
+                const chosenAnswer = def.answers.find(a => a.text === chosenText);
+                if (chosenAnswer && chosenAnswer.followUpQuestionId) {
+                  showFollowUpQuestions(chosenAnswer.followUpQuestionId); // Recursively show follow-ups
+                }
+              });
+            });
+          } else {
+            console.warn(`Question with ID ${questionId} not found.`);
+          }
+        }
+      });
+    }
+
+    // Show the first question (Q1)
+    const q1Def = questionMap['Q1'];
+    if (q1Def) {
+      const q1Block = createMultipleChoiceBlock(q1Def);
+      topContainer.appendChild(q1Block);
+
+      // Attach event listeners for Q1's answers
+      q1Block.querySelectorAll('input[type="radio"]').forEach(radio => {
+        radio.addEventListener('change', event => {
+          // Remove any previously displayed follow-up questions
+          ['Q2a', 'Q2b', 'Q3a', 'Q3b', 'Q3c'].forEach(id => removeIfExists(id));
+
+          const chosenText = event.target.value;
+          const chosenAnswer = q1Def.answers.find(a => a.text === chosenText);
+          if (chosenAnswer && chosenAnswer.followUpQuestionId) {
+            showFollowUpQuestions(chosenAnswer.followUpQuestionId); // Show all follow-up questions
+          }
+        });
+      });
+    }
+
+    // Helper function to remove a question block if it exists
+    function removeIfExists(id) {
+      const el = document.getElementById(id);
+      if (el) el.remove();
+    }
+
+    // Show standard questions (Q4, Q5, Q6, Q7, Q8)
+    const q4Def = questionMap['Q4'];
+    if (q4Def) {
+      bottomContainer.appendChild(createMultipleChoiceBlock(q4Def));
+    }
+    const q5Def = questionMap['Q5'];
+    if (q5Def) {
+      bottomContainer.appendChild(createMultipleChoiceBlock(q5Def));
+    }
+
+    // Q6, Q7, Q8 are open-ended
+    ['Q6', 'Q7', 'Q8'].forEach(oeId => {
+      const def = openEndedMap[oeId];
+      if (def) {
+        bottomContainer.appendChild(createOpenEndedBlock(def)); // Use createOpenEndedBlock for open-ended questions
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>K-12 Mental Health Tech Navigator Survey Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh; /* Ensure the gradient covers the full viewport */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(135deg, #DEFAF4, #BFF2F4); /* Default gradient */
+    }
+    .submission {
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      width: 80%; /* Center the submissions */
+      background-color: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .submission h2 {
+      margin-bottom: 5px;
+    }
+    .answers {
+      margin-left: 20px;
+    }
+    .answers li {
+      margin-bottom: 5px;
+    }
+    .logout-button, .csv-button {
+      background-color: #4CAF50; /* Green color */
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 14px;
+      font-family: Arial, sans-serif;
+      cursor: pointer;
+      border-radius: 5px;
+      text-decoration: none; /* Remove underline */
+      margin-right: 10px;
+    }
+    .logout-button:hover, .csv-button:hover {
+      background-color: #45a049; /* Darker green on hover */
+    }
+    h1 {
+      margin-top: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>K-12 Mental Health Tech Navigator Survey Submissions</h1>
+  <p>
+    <a href="{% url 'logout' %}" class="logout-button">Logout</a>
+    <a href="{% url 'download_csv' %}" class="csv-button">Download CSV</a>
+  </p>
+
+  {% for submission in submissions %}
+    <div class="submission">
+      <h2>Submission #{{ submission.id }}</h2>
+      <p style="color: green;">
+        Current server time: {{ current_time|date:"Y-m-d H:i:s" }}
+      </p> 
+      <p style="color: rgb(255, 0, 0);">
+        Submitted time: {{ submission.submitted_time|date:"Y-m-d H:i:s" }}
+      </p>
+
+      <p><strong>Redirected to:</strong> {{ submission.chosen_redirection|default:"None" }}</p>
+      
+      <h3>Answers:</h3>
+      <ul class="answers">
+        {% for answer in submission.answers %}
+          <li><strong>{{ answer.question_id }}:</strong> {{ answer.answer_text }}</li>
+        {% empty %}
+          <li>No answers recorded.</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% empty %}
+    <p>No submissions found.</p>   
+  {% endfor %}
+
+  <script>
+    // Function to set a random gradient direction
+    function setRandomGradient() {
+      const randomDegree = Math.floor(Math.random() * 360); // Random degree between 0 and 360
+      document.body.style.background = `linear-gradient(${randomDegree}deg, #A9E792, #D0F0C0, #DEFAF4, #F6FFFB, #BFF2F4, #AAE5EF, #A0D8E6)`;
+    }
+
+    // Set the gradient when the page loads
+    setRandomGradient();
+  </script>
+</body>
+</html>

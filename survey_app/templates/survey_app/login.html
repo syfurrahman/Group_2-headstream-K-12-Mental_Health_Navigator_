@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>K-12 Mental Health Tech Navigator Login</title>
+  <style>
+    :root {
+      --teal: #008080; /* Define teal color */
+      --vibrant-blue: #1E90FF; /* Define vibrant blue color */
+      --purple: #9D00FF; /* Define purple color */
+    }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* Full viewport height */
+      background: linear-gradient(135deg, var(--teal), var(--vibrant-blue), var(--purple)); /* Set gradient background */
+      color: rgb(0, 0, 0); /* Ensure text is readable on the gradient */
+    }
+    .login-container {
+      text-align: center;
+      background-color: white;
+      padding: 30px; /* Increase padding for a larger form */
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 450px; /* Increase max width for a larger form */
+    }
+    .login-container img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+    }
+    .login-container h2 {
+      margin-bottom: 20px;
+      color: black; /* Ensure the heading is readable on the white background */
+    }
+    .login-container form {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center the input fields and labels */
+    }
+    .login-container label {
+      margin-bottom: 5px; /* Add space between label and input field */
+      font-size: 14px;
+      color: #000000; /* Set label text color */
+      text-align: center; /* Center-align the label text */
+      width: 100%; /* Ensure the label spans the full width */
+    }
+    .login-container input {
+      width: 80%; /* Reduce width for better centering */
+      padding: 12px; /* Slightly larger padding for inputs */
+      margin-bottom: 15px;
+      font-size: 14px; /* Slightly smaller input text size */
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      color: #000000; /* Set input text color */
+      text-align: center; /* Center-align text and placeholder */
+    }
+    .login-container input::placeholder {
+      color: #888; /* Set placeholder color */
+      font-size: 14px; /* Ensure placeholder text is readable */
+      text-align: center; /* Center-align placeholder text */
+    }
+    .login-container button {
+      background-color: #4CAF50; /* Green button */
+      color: white;
+      border: none;
+      padding: 12px 20px; /* Slightly larger button */
+      font-size: 16px; /* Larger button text */
+      font-family: Arial, sans-serif;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .login-container button:hover {
+      background-color: #45a049; /* Darker green on hover */
+    }
+    .error-message {
+      color: red;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <!-- Add an image at the top -->
+    <img src="https://43992186.fs1.hubspotusercontent-na1.net/hubfs/43992186/JULY%20Webinar%20Toolkit%20Header%20(3)-1.png" alt="Login Image">
+
+    <h2>Login</h2>
+    {% if form.errors %}
+      <p class="error-message">Invalid username or password. Please contact your administrator if you have forgotten your password. </p>
+    {% endif %}
+    <form method="post">
+      {% csrf_token %}
+      <label for="id_username">Username</label>
+      <input type="text" id="id_username" name="username" placeholder="Enter your username">
+      <label for="id_password">Password</label>
+      <input type="password" id="id_password" name="password" placeholder="Enter your password">
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</body>
+</html>
