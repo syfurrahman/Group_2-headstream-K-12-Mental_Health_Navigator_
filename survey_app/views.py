@@ -8,7 +8,10 @@ from django.utils.timezone import now
 from django.http import HttpResponse
 from .utils import load_survey_definition, load_page_links
 from .models import SurveySubmission, SurveyAnswer  # Use consistent models
+from django.views.decorators.csrf import csrf_protect
 
+
+@csrf_protect
 def survey_form(request):
     # Load the survey definition and page links
     survey_data = load_survey_definition()
@@ -108,6 +111,9 @@ def dashboard_view(request):
         'current_time': current_time,
     })
 
+def thank_you_view(request):
+    return render(request, 'survey_app/thank_you.html')
+
 @login_required
 def download_csv(request):
     # Create the HttpResponse object with the appropriate CSV header.
@@ -132,3 +138,6 @@ def download_csv(request):
             ])
 
     return response
+
+#ef custom_csrf_failure_view(request, reason=""):
+   #return render(request, 'survey_app/csrf_failure.html', {'reason': reason})

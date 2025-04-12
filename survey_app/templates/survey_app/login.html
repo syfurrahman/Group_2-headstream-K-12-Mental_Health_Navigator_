@@ -2,11 +2,13 @@
 <html>
 <head>
   <title>K-12 Mental Health Tech Navigator Login</title>
+  {% load static %}
+  <link rel="icon" type="image/png" sizes="512x512" href="{% static 'survey_app/small_hn_logo.png' %}">
   <style>
     :root {
-      --teal: #008080; /* Define teal color */
-      --vibrant-blue: #1E90FF; /* Define vibrant blue color */
-      --purple: #9D00FF; /* Define purple color */
+      --blue: #4FAED8; /* Define blue color */
+      --black: #C6D75B; /* Define vibrant blue color */
+      --white: #E5386E; /* Define white color */
     }
     body {
       font-family: Arial, sans-serif;
@@ -16,7 +18,7 @@
       justify-content: center;
       align-items: center;
       height: 100vh; /* Full viewport height */
-      background: linear-gradient(135deg, var(--teal), var(--vibrant-blue), var(--purple)); /* Set gradient background */
+      background: linear-gradient(135deg, var(--blue), var(--white), var(--black)); /* Set gradient background */
       color: rgb(0, 0, 0); /* Ensure text is readable on the gradient */
     }
     .login-container {

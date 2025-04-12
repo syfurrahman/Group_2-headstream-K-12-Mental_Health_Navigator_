@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>K-12 Mental Health Tech Navigator Survey Dashboard</title>
+  <title>Survey Dashboard</title>
+  {% load static %}
+  <link rel="icon" type="image/png" href="{% static 'survey_app/small_hn_logo.png' %}">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -90,7 +92,7 @@
     // Function to set a random gradient direction
     function setRandomGradient() {
       const randomDegree = Math.floor(Math.random() * 360); // Random degree between 0 and 360
-      document.body.style.background = `linear-gradient(${randomDegree}deg, #A9E792, #D0F0C0, #DEFAF4, #F6FFFB, #BFF2F4, #AAE5EF, #A0D8E6)`;
+      document.body.style.background = `linear-gradient(${randomDegree}deg, #A9E792, #D0F0C0, #DEFAF4, #F6FFFB, #4FAED8, #C6D75B, #E5386E,#4FAED8, #C6D75B, #E5386E, #FFFFFF, #234EED)`;
     }
 
     // Set the gradient when the page loads
