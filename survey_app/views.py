@@ -139,5 +139,8 @@ def download_csv(request):
 
     return response
 
+def home(request):
+    return render(request, 'survey_app/index.html')
 #ef custom_csrf_failure_view(request, reason=""):
    #return render(request, 'survey_app/csrf_failure.html', {'reason': reason})
+

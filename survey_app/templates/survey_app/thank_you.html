@@ -1,8 +1,18 @@
-<!-- survey_app/templates/survey_app/thank_you.html -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>Survey Completed</title>
+    <script>
+        // Redirect after 10 seconds if a redirection link is available
+        document.addEventListener("DOMContentLoaded", function() {
+            const redirectUrl = "{{ chosen_url }}";
+            if (redirectUrl) {
+                setTimeout(function() {
+                    window.location.href = redirectUrl;
+                }, 5000); // 10 seconds
+            }
+        });
+    </script>
 </head>
 <body>
     <h1>Thank you for submitting!</h1>
@@ -10,6 +20,7 @@
     {% if chosen_r_link and chosen_url %}
       <p>You have been matched with <strong>{{ chosen_r_link }}</strong>.</p>
       <p><a href="{{ chosen_url }}" target="_blank">{{ chosen_url }}</a></p>
+      <p>You will be redirected shortly...</p>
     {% else %}
       <p>No specific recommendation was found.</p>
     {% endif %}

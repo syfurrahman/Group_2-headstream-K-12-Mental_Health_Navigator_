@@ -2,104 +2,6 @@
 <html>
 <head>
   <title>K-12 Mental Health Tech Navigator Survey</title>
-  <style>
-    /* Gradient background */
-    body {
-      background: linear-gradient(to top, #fff, #4682B4, #a8bace); /* Light blue to darker blue */
-      font-family: Arial, Helvetica, sans-serif;
-      color: #333;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh; /* Full viewport height */
-    }
-
-    /* Centered survey container */
-    .survey-container {
-      background-color: #fff; /* White background for the form */
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-      padding: 20px;
-      width: 80%;
-      max-width: 600px;
-      text-align: left;
-      overflow-y: auto; /* Make the form scrollable */
-      max-height: 90vh; /* Limit the height to 90% of the viewport */
-    }
-
-    .survey-container h1 {
-      text-align: center;
-      color: black; /* Black text for the title */
-      margin-top: 0;
-    }
-
-    .question-block {
-      margin-bottom: 1em;
-      padding: 1em;
-      border: 1px solid #ccc;
-      background-color: #f9f9f9; /* Light gray background for question blocks */
-      border-radius: 5px;
-    }
-
-    .question-block p {
-      font-size: 13px; /* Font size for questions */
-      margin-bottom: 0.5em;
-      color: black; /* Black text for questions */
-    }
-
-    .question-block label {
-      font-size: 13px; /* Font size for answers */
-      display: block;
-      margin-bottom: 0.5em;
-      color: black; /* Black text for answers */
-    }
-
-    .question-block input[type="text"] {
-      width: 100%; /* Full width for input fields */
-      padding: 8px;
-      font-size: 14px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    .question-block input[type="text"]::placeholder {
-      font-size: 14px; /* Make placeholder text larger */
-      color: #888; /* Gray placeholder text */
-    }
-
-    .submit-button {
-      background-color: #226ab6; /* Blue button */
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      font-size: 14px;
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 14px;
-      cursor: pointer;
-      border-radius: 5px;
-      display: block;
-      margin: 20px auto 0; /* Center the button */
-    }
-
-    .submit-button:hover {
-      background-color: #0056b3; /* Darker blue on hover */
-    }
-
-    /* Privacy policy text */
-    p {
-      font-size: 12px;
-      color: gray;
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    a {
-      color: rgb(0, 85, 255);
-      text-decoration: underline;
-    }
-  </style>
 </head>
 <body>
   <div class="survey-container">
@@ -107,6 +9,8 @@
 
     <form method="POST">
       {% csrf_token %}
+
+      <div id="surveyData" style="display: none;">{{ survey_data_json|safe }}</div>
 
       <!-- TOP container for Q1 and dynamically added follow-up questions -->
       <div id="top-container"></div>
@@ -123,7 +27,6 @@
       <button class="submit-button" type="submit">Submit</button>
     </form>
   </div>
-
   <script>
     // Parse survey data passed from the Django view
     const surveyData = JSON.parse('{{ survey_data_json|safe }}');
