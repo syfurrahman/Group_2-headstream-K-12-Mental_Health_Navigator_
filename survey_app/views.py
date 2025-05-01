@@ -199,3 +199,21 @@ def modal_survey_submit(request):
         return JsonResponse({'success': True, 'redirect_url': chosen_url})
 
     return JsonResponse({'success': False, 'message': 'Invalid request method.'})
+
+def index(request):
+    return render(request, 'survey_app/index.html')
+
+def page2(request):
+    return render(request, 'survey_app/page2.html')
+
+def page3(request):
+    return render(request, 'survey_app/page3.html')
+
+def page4(request):
+    return render(request, 'survey_app/page4.html')
+
+def page5(request):
+    return render(request, 'survey_app/page5.html')
+
+def page6(request):
+    return render(request, 'survey_app/page6.html')
