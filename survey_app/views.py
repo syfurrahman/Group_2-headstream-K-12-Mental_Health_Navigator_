@@ -200,20 +200,44 @@ def modal_survey_submit(request):
 
     return JsonResponse({'success': False, 'message': 'Invalid request method.'})
 
-def index(request):
-    return render(request, 'survey_app/index.html')
-
 def aboutus(request):
     return render(request, 'survey_app/aboutus.html')
 
-def page3(request):
-    return render(request, 'survey_app/page3.html')
+def assess(request):
+    return render(request, 'survey_app/assess.html')
 
-def page4(request):
-    return render(request, 'survey_app/page4.html')
+def case2(request):
+    return render(request, 'survey_app/case2.html')
 
-def page5(request):
-    return render(request, 'survey_app/page5.html')
+def case3(request):
+    return render(request, 'survey_app/case3.html')
 
-def page6(request):
-    return render(request, 'survey_app/page6.html')
+def case4(request):
+    return render(request, 'survey_app/case4.html')
+
+def case5(request):           
+    return render(request, 'survey_app/case5.html')
+
+def casestudies(request):
+    return render(request, 'survey_app/casestudies.html')
+
+def explore(request):
+    return render(request, 'survey_app/explore.html')
+
+def fundingStrategy(request):
+    return render(request, 'survey_app/fundingStrategy.html')
+
+def implementSolution(request):
+    return render(request, 'survey_app/implementSolution.html')
+
+def index(request):
+    return render(request, 'survey_app/index.html')
+
+def methuen(request):
+    return render(request, 'survey_app/methuen.html')
+
+def selectSolution(request):
+    return render(request, 'survey_app/selectSolution.html')
+
+def stakeholder(request):
+    return render(request, 'survey_app/stakeholder.html')

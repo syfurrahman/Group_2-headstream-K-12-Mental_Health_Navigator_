@@ -17,5 +17,17 @@ urlpatterns = [
     path('modal-survey-submit/', views.modal_survey_submit, name='modal_survey_submit'),
     path('', views.index, name='index'),  # Main page
     path('aboutus/', views.aboutus, name='aboutus'),  # About Us page
+    path('assess/', views.assess, name='assess'),  # Assessment page
+    path('case2/', views.case2, name='case2'),  # Case 2 page
+    path('case3/', views.case3, name='case3'),  # Case 3 page
+    path('case4/', views.case4, name='case4'),  # Case 4 page
+    path('case5/', views.case5, name='case5'),  # Case 5 page
+    path('casestudies/', views.casestudies, name='casestudies'),  # Case Studies page
+    path('explore/', views.explore, name='explore'),  # Explore page
+    path('fundingStrategy/', views.fundingStrategy, name='fundingStrategy'),  # Funding Strategy page
+    path('implementSolution/', views.implementSolution, name='implementSolution'),  # Implement Solution page
+    path('methuen/', views.methuen, name='methuen'),  # Methuen page
+    path('selectSolution/', views.selectSolution, name='selectSolution'),  # Select Solution page
+    path('stakeholder/', views.stakeholder, name='stakeholder'),  # Stakeholder page
 ]
 
