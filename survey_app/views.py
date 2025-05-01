@@ -203,8 +203,8 @@ def modal_survey_submit(request):
 def index(request):
     return render(request, 'survey_app/index.html')
 
-def page2(request):
-    return render(request, 'survey_app/page2.html')
+def aboutus(request):
+    return render(request, 'survey_app/aboutus.html')
 
 def page3(request):
     return render(request, 'survey_app/page3.html')

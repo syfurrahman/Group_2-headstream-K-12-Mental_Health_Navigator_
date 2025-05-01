@@ -16,5 +16,6 @@ urlpatterns = [
     path('thank-you/', views.thank_you_view, name='thank_you'),
     path('modal-survey-submit/', views.modal_survey_submit, name='modal_survey_submit'),
     path('', views.index, name='index'),  # Main page
+    path('aboutus/', views.aboutus, name='aboutus'),  # About Us page
 ]
 
