@@ -183,6 +183,102 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Modal for Survey Form
+// Modal for Survey Form
+// Modal for Survey Form
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('surveyModal');
+    const closeModal = document.getElementById('closeModal');
+    const openModalButton = document.getElementById('openSurveyModal'); // Button to open the modal
+    const surveyContent = document.getElementById('surveyContent');
+
+    // Function to show the modal
+    function showModal() {
+        modal.classList.add('active');
+        modal.classList.remove('hidden');
+    }
+
+    // Function to hide the modal
+    function hideModal() {
+        modal.classList.remove('active');
+        modal.classList.add('hidden');
+    }
+
+    // Fetch the survey form content
+    function loadSurveyForm() {
+        fetch('/modal-survey-submit/') // URL to the survey_form view
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to load survey form');
+                }
+                return response.text();
+            })
+            .then(html => {
+                surveyContent.innerHTML = html; // Inject the HTML into the modal
+                addCSRFToken(); // Add CSRF token to the form
+                attachFormSubmitHandler(); // Attach the form submission handler
+                showModal(); // Show the modal
+            })
+            .catch(error => {
+                console.error('Error loading survey form:', error);
+            });
+    }
+
+    // Close the modal when the close button is clicked
+    if (closeModal) {
+        closeModal.addEventListener('click', hideModal);
+    }
+
+    // Open the modal when the button is clicked
+    if (openModalButton) {
+        openModalButton.addEventListener('click', loadSurveyForm);
+    }
+
+    // Function to add CSRF token to the form
+    function addCSRFToken() {
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        const form = surveyContent.querySelector('form');
+        if (form) {
+            const csrfInput = document.createElement('input');
+            csrfInput.type = 'hidden';
+            csrfInput.name = 'csrfmiddlewaretoken';
+            csrfInput.value = csrfToken;
+            form.appendChild(csrfInput);
+        }
+    }
+
+    // Function to attach form submission handler
+    function attachFormSubmitHandler() {
+        const surveyForm = surveyContent.querySelector('form');
+        if (!surveyForm) return;
+
+        surveyForm.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent the default form submission
+
+            const formData = new FormData(surveyForm);
+
+            try {
+                const response = await fetch('/modal-survey-submit/', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Redirect to the thank you page or the provided URL
+                    window.location.href = result.redirect_url || '/thank-you/';
+                } else {
+                    alert(result.message || 'An error occurred while submitting the survey.');
+                }
+            } catch (error) {
+                console.error('Error submitting the survey:', error);
+                alert('An unexpected error occurred. Please try again.');
+            }
+        });
+    }
+});
+
+// Modal for Survey Form
 
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('surveyModal');

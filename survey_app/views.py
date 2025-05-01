@@ -9,6 +9,7 @@ from django.http import HttpResponse
 from .utils import load_survey_definition, load_page_links
 from .models import SurveySubmission, SurveyAnswer  # Use consistent models
 from django.views.decorators.csrf import csrf_protect
+from django.http import JsonResponse
 
 
 @csrf_protect
@@ -141,6 +142,60 @@ def download_csv(request):
 
 def home(request):
     return render(request, 'survey_app/index.html')
-#ef custom_csrf_failure_view(request, reason=""):
-   #return render(request, 'survey_app/csrf_failure.html', {'reason': reason})
 
+@csrf_protect
+def modal_survey_submit(request):
+    if request.method == 'POST':
+        # Load the survey definition
+        survey_data = load_survey_definition()
+        all_question_ids = [q['id'] for q in survey_data['questions']]
+        open_ended_ids = [q['id'] for q in survey_data['openEndedQuestions']]
+        all_ids = all_question_ids + open_ended_ids
+
+        # Check if the form has answers
+        has_answers = any(q_id in request.POST for q_id in all_ids)
+        if not has_answers:
+            return JsonResponse({'success': False, 'message': 'Please answer at least one question before submitting.'})
+
+        # Save the user's responses
+        submitted_time = now()
+        submission = SurveySubmission.objects.create(submitted_time=submitted_time)
+        tally = {}
+
+        for q_id in all_ids:
+            if q_id in request.POST:
+                user_answer = request.POST[q_id]
+                SurveyAnswer.objects.create(
+                    submission=submission,
+                    question_id=q_id,
+                    answer_text=user_answer
+                )
+                matching_question = next(
+                    (question for question in survey_data['questions'] if question['id'] == q_id), 
+                    None
+                )
+                if matching_question and matching_question.get('type') == 'multiple-choice':
+                    chosen_ans = next(
+                        (ans for ans in matching_question['answers'] if ans['text'] == user_answer),
+                        None
+                    )
+                    if chosen_ans:
+                        for r_link in chosen_ans.get('pageIds', []):
+                            tally[r_link] = tally.get(r_link, 0) + 1
+
+        # Determine the redirection link
+        if tally:
+            sorted_tally = sorted(tally.items(), key=lambda x: x[1], reverse=True)
+            best_r_key, highest_count = sorted_tally[0]
+            submission.chosen_redirection = best_r_key
+            submission.save()
+            chosen_url = load_page_links().get(best_r_key, '/thank-you/')
+        else:
+            submission.chosen_redirection = None
+            submission.save()
+            chosen_url = '/thank-you/'
+
+        # Return a JSON response with the redirection link
+        return JsonResponse({'success': True, 'redirect_url': chosen_url})
+
+    return JsonResponse({'success': False, 'message': 'Invalid request method.'})

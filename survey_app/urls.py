@@ -14,5 +14,6 @@ urlpatterns = [
     path('dashboard/', dashboard_view, name='dashboard'),
     path('download_csv/', views.download_csv, name='download_csv'),
     path('thank-you/', views.thank_you_view, name='thank_you'),
+    path('modal-survey-submit/', views.modal_survey_submit, name='modal_survey_submit'),
 ]
 

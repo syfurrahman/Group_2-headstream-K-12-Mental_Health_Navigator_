@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'survey_app/css/styles.css' %}">
     <title>K-12 Mental Health Tech | Supporting Student Wellbeing</title>
+    <link rel="icon" type="image/png" href="{% static 'survey_app/small_hn_logo.png' %}">
 </head>
 <body>
      <!-- Header Section -->
@@ -53,13 +54,37 @@
         </div>
     </header>
 
-    <!-- Modal Container -->
-    <div id="surveyModal" class="modal-overlay hidden">
-        <div class="modal-content">
-            <button class="close-modal" id="closeModal">✕</button>
-            <div id="surveyContent"></div> <!-- Content will be loaded here -->
+<!-- Modal Container -->
+<div id="surveyModal" class="modal-overlay hidden">
+    <div class="modal-content">
+        <button class="close-modal" id="closeModal">✕</button>
+        <div id="surveyContent">
+            <div class="survey-container">
+                <h1>K-12 Mental Health Tech Navigator Survey</h1>
+
+                <form method="POST" action="/modal-survey-submit/">
+                    {% csrf_token %}
+
+                    <div id="surveyData" style="display: none;">{{ survey_data_json|safe }}</div>
+
+                    <!-- TOP container for Q1 and dynamically added follow-up questions -->
+                    <div id="top-container"></div>
+
+                    <!-- BOTTOM container for Q4, Q5, Q6, Q7, Q8 (always shown) -->
+                    <div id="bottom-container"></div>
+
+                    <!-- Add the privacy policy text before the submit button -->
+                    <p>
+                        By sharing, the user consents to the collection and use of their personal data in accordance with the 
+                        <a href="https://www.k12mentalhealthtech.org/privacy-policy">privacy policy</a>.
+                    </p>
+
+                    <button class="submit-button" type="submit">Submit</button>
+                </form>
+            </div>
         </div>
-    </div> 
+    </div>
+</div>
 
     <!-- Hero Section -->
     <section class="hero">
