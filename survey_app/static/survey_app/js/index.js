@@ -188,7 +188,6 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('surveyModal');
     const closeModal = document.getElementById('closeModal');
-    const openModalButton = document.getElementById('openSurveyModal'); // Button to open the modal
     const surveyContent = document.getElementById('surveyContent');
 
     // Function to show the modal
@@ -203,9 +202,9 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.classList.add('hidden');
     }
 
-    // Fetch the survey form content
+    // Automatically load the survey form when the page loads
     function loadSurveyForm() {
-        fetch('/modal-survey-submit/') // URL to the survey_form view
+        fetch('/survey/') // URL to the survey_form view
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Failed to load survey form');
@@ -216,6 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 surveyContent.innerHTML = html; // Inject the HTML into the modal
                 addCSRFToken(); // Add CSRF token to the form
                 attachFormSubmitHandler(); // Attach the form submission handler
+                initializeSurveyLogic(); // Initialize survey logic
                 showModal(); // Show the modal
             })
             .catch(error => {
@@ -228,10 +228,8 @@ document.addEventListener('DOMContentLoaded', () => {
         closeModal.addEventListener('click', hideModal);
     }
 
-    // Open the modal when the button is clicked
-    if (openModalButton) {
-        openModalButton.addEventListener('click', loadSurveyForm);
-    }
+    // Automatically load the survey form when the page loads
+    loadSurveyForm();
 
     // Function to add CSRF token to the form
     function addCSRFToken() {
@@ -276,62 +274,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-});
-
-// Modal for Survey Form
-
-document.addEventListener('DOMContentLoaded', () => {
-    const modal = document.getElementById('surveyModal');
-    const surveyContent = document.getElementById('surveyContent');
-    const closeModal = document.getElementById('closeModal');
-
-    // Function to show the modal
-    function showModal() {
-        modal.classList.add('active');
-    }
-
-    // Function to hide the modal
-    function hideModal() {
-        modal.classList.remove('active');
-    }
-
-    // Fetch the survey form content
-    fetch('/survey/') // URL to the survey_form view
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to load survey form');
-            }
-            return response.text();
-        })
-        .then(html => {
-            surveyContent.innerHTML = html; // Inject the HTML into the modal
-            addCSRFToken(); // Add CSRF token to the form
-            initializeSurveyLogic(); // Initialize the survey logic after loading
-            showModal(); // Show the modal
-        })
-        .catch(error => {
-            console.error('Error loading survey form:', error);
-        });
-
-    // Close the modal when the close button is clicked
-    closeModal.addEventListener('click', hideModal);
-
-    // Function to add CSRF token to the form
-    function addCSRFToken() {
-        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-        const form = surveyContent.querySelector('form');
-        if (form) {
-            const csrfInput = document.createElement('input');
-            csrfInput.type = 'hidden';
-            csrfInput.name = 'csrfmiddlewaretoken';
-            csrfInput.value = csrfToken;
-            form.appendChild(csrfInput);
-        }
-    }
 
     // Function to initialize survey logic
     function initializeSurveyLogic() {
-        const surveyData = JSON.parse(document.getElementById('surveyData').textContent);
+        const surveyDataElement = document.getElementById('surveyData');
+        if (!surveyDataElement) return;
+
+        const surveyData = JSON.parse(surveyDataElement.textContent);
         console.log("Parsed survey data:", surveyData);
 
         const allQuestions = surveyData.questions;
@@ -440,15 +389,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (el) el.remove();
         }
 
-            // Show standard questions (Q4, Q5, Q6, Q7, Q8)
-    const q4Def = questionMap['Q4'];
-    if (q4Def) {
-      bottomContainer.appendChild(createMultipleChoiceBlock(q4Def));
-    }
-    const q5Def = questionMap['Q5'];
-    if (q5Def) {
-      bottomContainer.appendChild(createMultipleChoiceBlock(q5Def));
-    }
+        // Show standard questions (Q4, Q5, Q6, Q7, Q8)
+        const q4Def = questionMap['Q4'];
+        if (q4Def) {
+            bottomContainer.appendChild(createMultipleChoiceBlock(q4Def));
+        }
+        const q5Def = questionMap['Q5'];
+        if (q5Def) {
+            bottomContainer.appendChild(createMultipleChoiceBlock(q5Def));
+        }
 
         ['Q6', 'Q7', 'Q8'].forEach(oeId => {
             const def = openEndedMap[oeId];
