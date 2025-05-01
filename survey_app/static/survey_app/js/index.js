@@ -190,16 +190,50 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeModal = document.getElementById('closeModal');
     const surveyContent = document.getElementById('surveyContent');
 
-    // Function to show the modal
+    const thankYouModal = document.getElementById('thankYouModal');
+    const closeThankYouModal = document.getElementById('closeThankYouModal');
+    const countdownElement = document.getElementById('countdown');
+    const redirectLink = document.getElementById('redirectLink');
+
+    let countdownInterval;
+
+    // Function to show the survey modal
     function showModal() {
         modal.classList.add('active');
         modal.classList.remove('hidden');
     }
 
-    // Function to hide the modal
+    // Function to hide the survey modal
     function hideModal() {
         modal.classList.remove('active');
         modal.classList.add('hidden');
+    }
+
+    // Function to show the thank you modal
+    function showThankYouModal(redirectUrl) {
+        thankYouModal.classList.add('active');
+        thankYouModal.classList.remove('hidden');
+        redirectLink.href = redirectUrl;
+
+        let countdown = 5;
+        countdownElement.textContent = countdown;
+
+        countdownInterval = setInterval(() => {
+            countdown -= 1;
+            countdownElement.textContent = countdown;
+
+            if (countdown === 0) {
+                clearInterval(countdownInterval);
+                window.location.href = redirectUrl; // Redirect after countdown
+            }
+        }, 1000);
+    }
+
+    // Function to hide the thank you modal
+    function hideThankYouModal() {
+        thankYouModal.classList.remove('active');
+        thankYouModal.classList.add('hidden');
+        clearInterval(countdownInterval); // Stop the countdown if the modal is closed
     }
 
     // Automatically load the survey form when the page loads
@@ -223,9 +257,14 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
-    // Close the modal when the close button is clicked
+    // Close the survey modal when the close button is clicked
     if (closeModal) {
         closeModal.addEventListener('click', hideModal);
+    }
+
+    // Close the thank you modal when the close button is clicked
+    if (closeThankYouModal) {
+        closeThankYouModal.addEventListener('click', hideThankYouModal);
     }
 
     // Automatically load the survey form when the page loads
@@ -263,8 +302,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
 
                 if (result.success) {
-                    // Redirect to the thank you page or the provided URL
-                    window.location.href = result.redirect_url || '/thank-you/';
+                    // Hide the survey modal
+                    hideModal();
+
+                    // Show the thank you modal with the redirect URL
+                    showThankYouModal(result.redirect_url || '/thank-you/');
                 } else {
                     alert(result.message || 'An error occurred while submitting the survey.');
                 }
