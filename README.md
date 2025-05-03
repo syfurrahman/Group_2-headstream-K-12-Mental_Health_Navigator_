@@ -27,13 +27,13 @@ This project is designed to combine both the frontend and backend for the K-12 M
 
 ## Project Structure
 
-All the html files are in survey_project/survey_app/templates/survey_app
+All the html files are in survey_project/survey_app/templates/survey_app  directory
 
-CSS files are in survey_project/survey_app/static/survey_app/css
+CSS files are in survey_project/survey_app/static/survey_app/css directory
 
-Js files are in survey_project/survey_app/static/survey_app/js
+Js files are in survey_project/survey_app/static/survey_app/js  directory
 
-All images need to be placed in survey_project/survey_app/static/survey_app/images
+All images need to be placed in survey_project/survey_app/static/survey_app/images  directory
 
 ---
 
