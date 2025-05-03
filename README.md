@@ -2,24 +2,34 @@
 
 This project is designed to combine both the frontend and backend for the K-12 Mental Health Navigator. It helps schools and districts choose and use effective digital tools for student mental health and well-being.
 
-## Navigating to pages 
+## Navigating to Pages
 
-Links to different pages: 
+Here are the links to access different pages of the application:
 
-Index - http://127.0.0.1:8000/  
-About us -  http://127.0.0.1:8000/aboutus/
-Explore - http://127.0.0.1:8000/explore/
-http://127.0.0.1:8000/assess/
-http://127.0.0.1:8000/stakeholder/
-http://127.0.0.1:8000/selectSolution/
-http://127.0.0.1:8000/fundingStrategy/
-http://127.0.0.1:8000/implementSolution/
-Methuen - http://127.0.0.1:8000/methuen/
-http://127.0.0.1:8000/case2/
-http://127.0.0.1:8000/case3/
-Case 4 - http://127.0.0.1:8000/case4/
-Case 5 - http://127.0.0.1:8000/case5/
-Index contact - http://127.0.0.1:8000/#contact 
+- **[Home/Index](http://127.0.0.1:8000/):** The main landing page of the application.
+- **[About Us](http://127.0.0.1:8000/aboutus/):** Learn more about the purpose and mission of the project.
+- **[Explore](http://127.0.0.1:8000/explore/):** Discover tools and resources for mental health support.
+- **[Contact](http://127.0.0.1:8000/#contact):** Reach out to us via the contact section on the homepage.
+
+### Additional Pages
+
+- **[Assess](http://127.0.0.1:8000/assess/):** Evaluate student needs for mental health solutions.
+- **[Stakeholder Engagement](http://127.0.0.1:8000/stakeholder/):** Plan for stakeholder involvement.
+- **[Select Solutions](http://127.0.0.1:8000/selectSolution/):** Choose relevant mental health solutions.
+- **[Funding Strategy](http://127.0.0.1:8000/fundingStrategy/):** Develop a funding strategy for implementation.
+- **[Implement Solution](http://127.0.0.1:8000/implementSolution/):** Steps to implement chosen solutions.
+
+### Case Studies
+
+- **[Methuen](http://127.0.0.1:8000/methuen/):** Case study on Methuen's mental health initiatives.
+- **[Case 2](http://127.0.0.1:8000/case2/):** Rim of the World Unified School District case study.
+- **[Case 3](http://127.0.0.1:8000/case3/):** Uplift Education case study.
+- **[Case 4](http://127.0.0.1:8000/case4/):** Judson ISD case study.
+- **[Case 5](http://127.0.0.1:8000/case5/):** Cherry Creek case study.
+
+### Quick Access
+
+- **[Index Contact](http://127.0.0.1:8000/#contact):** Direct link to the contact section on the homepage.
 ---
 
 ## Table of Contents
