@@ -35,7 +35,7 @@ Js files are in survey_project/survey_app/static/survey_app/js
 
 All images need to be placed in survey_project/survey_app/static/survey_app/images
 
-Setup Instructions
+## Setup Instructions
 Prerequisites
 Python: Ensure Python 3.9 or higher is installed.
 Django: Install Django using pip:
@@ -73,7 +73,7 @@ python manage.py runserver
 2. Access the application at http://127.0.0.1:8000/.
 
 
-Making Changes
+## Making Changes
 After Making Changes to Code or Templates
 
 1. Save your changes.
@@ -89,7 +89,7 @@ python manage.py collectstatic
 2. Restart the server:
 python manage.py runserver
 
-Linking Pages
+## Linking Pages
 Adding Links to Navigation
 To add a new page to the navigation menu:
 
@@ -103,7 +103,7 @@ path('new-page/', views.new_page, name='new_page'),
 3. Add the link to the navigation in index.html or other templates:
 <li><a href="{% url 'new_page' %}">New Page</a></li>
 
-Adding Images
+## Adding Images
 Placing Images
 
 1. Place your images in the static/survey_app/images/ directory. Example:
@@ -114,7 +114,7 @@ Use the {% static %} template tag to reference images:
 
 <img src="{% static 'survey_app/images/logo.png' %}" alt="Logo">
 
-Troubleshooting
+## Troubleshooting
 Common Issues
 
 1. Static Files Not Loading
