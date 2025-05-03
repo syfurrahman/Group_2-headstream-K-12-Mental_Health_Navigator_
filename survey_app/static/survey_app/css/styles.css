@@ -1031,6 +1031,13 @@ footer {
   color: #505050;
 }
 
+
+/*******************************************************
+ * WARNING: DO NOT MODIFY THE CODE BELOW
+ * This code is critical for the functionality and design
+ * of the application. Modifying it may cause unexpected 
+ * behavior or break the layout.
+ *******************************************************/
 /* Modal overlay */
 .modal-overlay {
   position: fixed;
@@ -1181,3 +1188,9 @@ footer {
   color: rgb(0, 85, 255);
   text-decoration: underline;
 }
+/*******************************************************
+ * WARNING: DO NOT MODIFY THE CODE ABOVE
+ * This code is critical for the functionality and design
+ * of the application. Modifying it may cause unexpected 
+ * behavior or break the layout.
+ *******************************************************/

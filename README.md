@@ -2,6 +2,24 @@
 
 This project is designed to combine both the frontend and backend for the K-12 Mental Health Navigator. It helps schools and districts choose and use effective digital tools for student mental health and well-being.
 
+## Navigating to pages 
+
+Links to different pages: 
+
+Index - http://127.0.0.1:8000/  
+About us -  http://127.0.0.1:8000/aboutus/
+Explore - http://127.0.0.1:8000/explore/
+http://127.0.0.1:8000/assess/
+http://127.0.0.1:8000/stakeholder/
+http://127.0.0.1:8000/selectSolution/
+http://127.0.0.1:8000/fundingStrategy/
+http://127.0.0.1:8000/implementSolution/
+Methuen - http://127.0.0.1:8000/methuen/
+http://127.0.0.1:8000/case2/
+http://127.0.0.1:8000/case3/
+Case 4 - http://127.0.0.1:8000/case4/
+Case 5 - http://127.0.0.1:8000/case5/
+Index contact - http://127.0.0.1:8000/#contact 
 ---
 
 ## Table of Contents

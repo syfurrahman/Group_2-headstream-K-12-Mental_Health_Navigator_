@@ -182,6 +182,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+
+/*******************************************************
+ * WARNING: DO NOT MODIFY THE CODE BELOW
+ * This code is critical for the functionality of the application.
+ * Modifying this code will cause unexpected behavior or break features.
+ *******************************************************/
 // Modal for Survey Form
 // Modal for Survey Form
 // Modal for Survey Form
@@ -449,3 +455,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+/*******************************************************
+ * WARNING: DO NOT MODIFY THE CODE ABOVE
+ * This code is critical for the functionality of the application.
+ * Modifying this code will cause unexpected behavior or break features.
+ *******************************************************/
