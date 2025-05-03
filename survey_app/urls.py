@@ -7,8 +7,7 @@ from survey_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),  # Home page
-    path('survey/', survey_form, name='survey_form'), # use '' to make survey be home page
+    path('survey/', survey_form, name='survey_form'),  # Survey page
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('dashboard/', dashboard_view, name='dashboard'),
