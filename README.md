@@ -27,26 +27,13 @@ This project is designed to combine both the frontend and backend for the K-12 M
 
 ## Project Structure
 
-survey_project/
-├── survey_app/
-│   ├── templates/survey_app/       # HTML templates
-│   │   ├── index.html              # Main page
-│   │   ├── aboutus.html            # About Us page
-│   │   ├── assess.html             # Assess page
-│   │   ├── casestudies.html        # Case Studies page
-│   │   ├── explore.html            # Explore page
-│   │   ├── ...                     # Other pages
-│   ├── static/survey_app/          # Static files
-│   │   ├── css/                    # CSS files
-│   │   │   ├── styles.css          # Main stylesheet
-│   │   ├── images/                 # Images
-│   │   │   ├── logo.png            # Example logo
-│   │   │   ├── hero.jpg            # Example hero image
-│   │   ├── js/                     # JavaScript files
-│   │   │   ├── index.js            # Main JavaScript file
-│   ├── views.py                    # Django views
-│   ├── urls.py                     # URL routing
-├── manage.py                       # Django management script
+All the html files are in survey_project/survey_app/templates/survey_app
+
+CSS files are in survey_project/survey_app/static/survey_app/css
+
+Js files are in survey_project/survey_app/static/survey_app/js
+
+All images need to be placed in survey_project/survey_app/static/survey_app/images
 
 Setup Instructions
 Prerequisites
