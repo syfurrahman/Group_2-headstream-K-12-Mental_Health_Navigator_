@@ -113,6 +113,14 @@ http://127.0.0.1:8000/.
 
 1. Start the Django development server:
 
+Run this command:
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+Run the server 
+
 ```bash
 python manage.py runserver
 ```
@@ -175,16 +183,62 @@ path('new-page/', views.new_page, name='new_page'),
 ## Adding Images
 Placing Images
 
-1. Place your images in the static/survey_app/images/ directory. Example:
+To see example in use go to:
+
+1. [Example](#example)
+
+1. To add an image to your project, follow these steps:
+
+    1. Place your images in the static/survey_app/images/ directory. 
+
+Example:
 
 /survey_project/survey_app/static/survey_app/images/example.png
 
-Referencing Images in Templates
+    2. Ensure the image file is named appropriately (e.g., logo.png, banner.jpg) and avoid spaces or special characters in the filename.
+
+2. Run the following command to make static work without it images won't show up:
+
+```bash
+python manage.py collectstatic
+```
+
+3. Restart the Django Development Server
+
+1. Run this command:
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+2. Run the server 
+
+```bash
+python manage.py runserver
+```
+
+4. Referencing Images in Templates
 Use the {% static %} template tag to reference images:
 
 ```html
-<img src="{% static 'survey_app/images/logo.png' %}" alt="Logo">
+<img src="{% static 'survey_app/images/example.png' %}" alt="Example Image">
 ```
+
+## Example
+Here is a example used in **[Case 3](http://127.0.0.1:8000/case3/):**  
+
+Lines 139 - 142: 
+
+```html
+<div class="image-container">
+
+<!-- Example in use for dis.png -->
+    <img src="{% static 'survey_app/images/dis.png' %}" alt="School implementation workshop">
+
+    <p class="image-caption">Uplift provides comprehensive training to ensure successful implementation in school environments.</p>
+</div>
+```
+
 ---
 ## Troubleshooting
 Common Issues
