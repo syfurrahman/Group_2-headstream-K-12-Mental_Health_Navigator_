@@ -11,7 +11,7 @@ Here are the links to access different pages of the application:
 - **[Explore](http://127.0.0.1:8000/explore/):** Discover tools and resources for mental health support.
 - **[Contact](http://127.0.0.1:8000/#contact):** Reach out to us via the contact section on the homepage.
 
-### Additional Pages
+### Explore Pages
 
 - **[Assess](http://127.0.0.1:8000/assess/):** Evaluate student needs for mental health solutions.
 - **[Stakeholder Engagement](http://127.0.0.1:8000/stakeholder/):** Plan for stakeholder involvement.
@@ -95,16 +95,22 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-4. Run the development server:
+4. Collect Static Files:
+
+```bash
+python manage.py collectstatic
+```
+
+5. Run the development server:
 
 ```bash
 python manage.py runserver
 ```
 
-5. Open the application in your browser:
+6. Open the application in your browser:
 
 ```bash
-http://127.0.0.1:8000/.
+http://127.0.0.1:8000/
 ```
 
 ---
@@ -150,7 +156,13 @@ After Adding New Static Files (CSS, JS, Images)
 python manage.py collectstatic
 ```
 
-2. Restart the server:
+2. Run this command:
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+3. Restart the server:
 
 ```bash
 python manage.py runserver
