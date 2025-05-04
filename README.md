@@ -243,26 +243,22 @@ Lines 139 - 142:
 ## Troubleshooting
 Common Issues
 
-1. Static Files Not Loading
 
-Ensure STATIC_URL and STATICFILES_DIRS are configured in settings.py:
+1. Page Not Found (404)
 
-```bash
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
+First ensure that the CSS styles page is linked correctly:
+
+```html
+<link rel="stylesheet" href="{% static 'survey_app/css/styles.css' %}">
 ```
-
-Run python manage.py collectstatic.
-
-2. Page Not Found (404)
 
 Ensure the view is defined in views.py and the URL pattern is added in urls.py.
 
-3. CSRF Token Missing
+2. load static Token Missing
 
-Ensure {% csrf_token %} is included in all forms.
+Ensure {% load static %} is included in all forms.
 
-4. JavaScript Not Working
+3. JavaScript Not Working
 Make sure your script is referenced properly:
 
 ```html

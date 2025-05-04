@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'survey_app/css/styles.css' %}">
     <title>K-12 Mental Health Tech | Supporting Student Wellbeing</title>
+    <link rel="icon" type="image/png" href="{% static 'survey_app/small_hn_logo.png' %}">
 </head>
 <body>
     <!-- Header Section -->
@@ -285,7 +286,7 @@
                 <p>Serving over 23,000 students across 30 campuses in the greater San Antonio area, Judson Independent School District (JISD) faced growing mental health challenges among its diverse student population. With determination and innovative thinking, district leaders transformed their approach to student wellness through strategic technology integration and community partnerships.</p>
                 
                 <div class="image-container">
-                    <img src="/client/src/4.png" alt="Judson ISD campus">
+                    <img src="{% static 'survey_app/images/4.png' %}" alt="Judson ISD campus">
                     <p class="image-caption">Judson ISD serves a diverse community of students across the San Antonio metropolitan area.</p>
                 </div>
                 
@@ -315,7 +316,7 @@
                 </ul>
                 
                 <div class="image-container">
-                    <img src="/client/src/4_2.png" alt="Digital referral dashboard">
+                    <img src="{% static 'survey_app/images/4_2.png' %}" alt="Digital referral dashboard">
                     <p class="image-caption">Judson's digital referral system allows for secure, efficient reporting of student wellness concerns.</p>
                 </div>
                 
@@ -519,6 +520,6 @@
             </div>
         </div>
     </footer>
-    <script src="index.js"></script>
+    <script src="{% static 'survey_app/js/index.js' %}" defer></script>
 </body>
 </html>
