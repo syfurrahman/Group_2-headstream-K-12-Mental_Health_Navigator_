@@ -4,6 +4,7 @@ from survey_app.views import survey_form, login_view, logout_view, dashboard_vie
 from . import views
 from django.contrib import admin
 from survey_app import views
+from .views import chatbot_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,5 +29,6 @@ urlpatterns = [
     path('methuen/', views.methuen, name='methuen'),  # Methuen page
     path('selectSolution/', views.selectSolution, name='selectSolution'),  # Select Solution page
     path('stakeholder/', views.stakeholder, name='stakeholder'),  # Stakeholder page
+    path("chat/", views.chatbot_view, name="chat"), # Chatbot endpoint
 ]
 
