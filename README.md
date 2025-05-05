@@ -138,64 +138,95 @@ python manage.py runserver
 http://127.0.0.1:8000/.
 ```
 ---
+
 ## Making Changes
 
-Before making changes do:
+### Step 1: Start with the Main Branch
+1. Switch to the main branch:
 
-```bash
-git pull origin main
-```
+    ```bash
+    git checkout main
+    ```
+2. Pull the latest changes:
 
-After Making Changes to Code or Templates
+    ```bash
+    git pull origin main
+    ```
 
-1. Save your changes.
-2. Restart the development server:
+### Step 2: Create a Feature Branch
 
-```bash
-python manage.py runserver
-```
+1. Create a new branch for your task:
 
-3. Refresh the browser to see the updates.
+    ```bash
+    git checkout -b feature/new-task
+    ```
 
-After Adding New Static Files (CSS, JS, Images) 
+### Step 3: Make Your Changes
 
-See [Project Structure](#project-structure) for where to put the files correctly
+1. Edit the code or templates as needed.
+2. Save your changes.
+3. Restart the development server to see updates:
+    ```bash
+    python manage.py runserver
+    ```
+4. Refresh your browser to verify the changes.
 
-1. Collect static files:
+### Step 4: Add New Static Files (CSS, JS, Images)
+1. Place the files in the correct directories. See [Project Structure](#project-structure) for details.
+2. Collect static files:
+    ```bash
+    python manage.py collectstatic
+    ```
+3. Apply migrations (if needed):
+    ```bash
+    python manage.py makemigrations
+    python manage.py migrate
+    ```
+4. Restart the server:
+    ```bash
+    python manage.py runserver
+    ```
 
-```bash
-python manage.py collectstatic
-```
+### Step 5: Sync with the Main Branch
+1. Before pushing your changes, sync your branch with the main branch to avoid conflicts:
+    ```bash
+    git pull origin main --rebase
+    ```
 
-2. Run this command:
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
+### Step 6: Commit and Push Changes
+1. Check the status of modified files:
+    ```bash
+    git status
+    ```
+2. Stage your changes:
+    ```bash
+    git add .
+    ```
+3. Commit with a descriptive message:
+    ```bash
+    git commit -m "Add [your feature description]"
+    ```
+4. Push your feature branch:
+    ```bash
+    git push origin feature/new-task
+    ```
 
-3. Restart the server:
+### Step 7: Open a Pull Request (PR)
+1. Go to the repository on GitHub.
+2. Click “Compare & pull request.”
+3. Ensure the base is `main` and the compare is your branch.
+4. Add a title and description for your PR.
+5. Submit the PR and request a review.
 
-```bash
-python manage.py runserver
-```
-4. To terminate server:
+### Step 8: Follow Protected Branch Rules
+- The `main` branch is protected. Do not push directly to it.
+- All updates must go through pull requests and be reviewed before merging.
 
-Press Option C (Mac) or Press Ctrl + C (Windows) in the terminal where the server is running.
+### Step 9: Stop the Server (Optional)
+To stop the development server:
+- On Mac: Press `Option + C`.
+- On Windows: Press `Ctrl + C`.
 
-5. To update changes on Github do each: 
-
-```bash
-
-git pull origin main
-
-git add -all
-
-git init
-
-git commit -m "Comment"
-
-git push
-```
 
 ---
 ## Linking Pages
