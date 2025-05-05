@@ -9,7 +9,9 @@ from django.http import HttpResponse
 from .utils import load_survey_definition, load_page_links
 from .models import SurveySubmission, SurveyAnswer  # Use consistent models
 from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+from .utils import ask_llama3
 
 
 @csrf_protect
@@ -241,3 +243,15 @@ def selectSolution(request):
 
 def stakeholder(request):
     return render(request, 'survey_app/stakeholder.html')
+
+@csrf_exempt
+def chatbot_view(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            user_msg = data.get("message", "")
+            reply = ask_llama3(user_msg)
+            return JsonResponse({"reply": reply})
+        except Exception as e:
+            return JsonResponse({"reply": "Oops! Something went wrong."}, status=500)
+    return JsonResponse({"error": "Only POST allowed."}, status=405)

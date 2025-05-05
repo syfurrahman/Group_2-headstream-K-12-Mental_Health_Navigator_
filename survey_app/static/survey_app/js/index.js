@@ -53,7 +53,13 @@ function renderMessages() {
     messages.forEach(msg => {
       const div = document.createElement("div");
       div.className = msg.sender === "user" ? "user-msg" : "bot-msg";
-      div.textContent = msg.text;
+      if (msg.sender === "user") {
+        // Prevent user HTML injection
+        div.textContent = msg.text;
+      } else {
+        // Allow bot to render safe HTML (like links)
+        div.innerHTML = DOMPurify.sanitize(msg.text);
+      }
       chatBody.appendChild(div);
     });
   }
@@ -69,18 +75,18 @@ async function sendMessage() {
   renderMessages();
 
   try {
-    const res = await fetch("http://localhost:3001/api/chat/completions", {
+    const res = await fetch(`${window.location.origin}/chat/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: input }),
     });
 
     const data = await res.json();
-    const botMessage = { sender: "grok", text: data.reply };
+    const botMessage = { sender: "groq", text: data.reply };
     messages.push(botMessage);
   } catch (err) {
     console.error(err);
-    messages.push({ sender: "grok", text: "Oops! Something went wrong." });
+    messages.push({ sender: "groq", text: "Oops! Something went wrong." });
   }
 
   renderMessages();
