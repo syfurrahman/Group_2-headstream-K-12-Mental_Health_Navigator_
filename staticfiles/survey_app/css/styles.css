@@ -1030,3 +1030,167 @@ footer {
 .panel-content {
   color: #505050;
 }
+
+
+/*******************************************************
+ * WARNING: DO NOT MODIFY THE CODE BELOW
+ * This code is critical for the functionality and design
+ * of the application. Modifying it may cause unexpected 
+ * behavior or break the layout.
+ *******************************************************/
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  visibility: hidden; /* Hidden by default */
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Modal content */
+.modal-content {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  width: 90%; /* Adjust width for larger forms */
+  max-width: 800px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow-y: auto; /* Enable scrolling */
+  max-height: 90vh; /* Limit height to 90% of the viewport */
+  position: relative;
+}
+
+/* Close button */
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ff5c5c;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.close-modal:hover {
+  background: #ff1c1c;
+}
+
+
+
+/*Survey Page styles*/
+ /* Gradient background */
+ #surveyModal .body {
+  background: linear-gradient(to top, #fff, #4682B4, #a8bace); /* Light blue to darker blue */
+  font-family: Arial, Helvetica, sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+}
+
+/* Centered survey container */
+/* Survey container styles */
+#surveyModal .survey-container {
+  background-color: #fff; /* White background for the form */
+  border-radius: 10px;
+  padding: 20px;
+  overflow-y: auto; /* Make the form scrollable */
+  max-height: 80vh; /* Limit the height to 80% of the viewport */
+}
+
+#surveyModal .survey-container h1 {
+  text-align: center;
+  color: black;
+  margin-top: 0;
+}
+
+
+#surveyModal .question-block {
+  margin-bottom: 1em;
+  padding: 1em;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+#surveyModal .question-block p {
+  font-size: 13px; /* Font size for questions */
+  margin-bottom: 0.5em;
+  color: black; /* Black text for questions */
+}
+
+#surveyModal .question-block label {
+  font-size: 13px; /* Font size for answers */
+  display: block;
+  margin-bottom: 0.5em;
+  color: black; /* Black text for answers */
+}
+
+#surveyModal .question-block input[type="text"] {
+  width: 100%; /* Full width for input fields */
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#surveyModal .question-block input[type="text"]::placeholder {
+  font-size: 14px; /* Make placeholder text larger */
+  color: #888; /* Gray placeholder text */
+}
+
+#surveyModal .submit-button {
+  background-color: #226ab6; /* Blue button */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  display: block;
+  margin: 20px auto 0; /* Center the button */
+}
+
+#surveyModal .submit-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Privacy policy text */
+#surveyModal p {
+  font-size: 12px;
+  color: gray;
+  text-align: center;
+  margin-top: 20px;
+}
+
+#surveyModal a {
+  color: rgb(0, 85, 255);
+  text-decoration: underline;
+}
+/*******************************************************
+ * WARNING: DO NOT MODIFY THE CODE ABOVE
+ * This code is critical for the functionality and design
+ * of the application. Modifying it may cause unexpected 
+ * behavior or break the layout.
+ *******************************************************/

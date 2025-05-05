@@ -181,3 +181,282 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+
+/*******************************************************
+ * WARNING: DO NOT MODIFY THE CODE BELOW
+ * This code is critical for the functionality of the application.
+ * Modifying this code will cause unexpected behavior or break features.
+ *******************************************************/
+// Modal for Survey Form
+// Modal for Survey Form
+// Modal for Survey Form
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('surveyModal');
+    const closeModal = document.getElementById('closeModal');
+    const surveyContent = document.getElementById('surveyContent');
+
+    const thankYouModal = document.getElementById('thankYouModal');
+    const closeThankYouModal = document.getElementById('closeThankYouModal');
+    const countdownElement = document.getElementById('countdown');
+    const redirectLink = document.getElementById('redirectLink');
+
+    let countdownInterval;
+
+    // Function to show the survey modal
+    function showModal() {
+        modal.classList.add('active');
+        modal.classList.remove('hidden');
+    }
+
+    // Function to hide the survey modal
+    function hideModal() {
+        modal.classList.remove('active');
+        modal.classList.add('hidden');
+    }
+
+    // Function to show the thank you modal
+    function showThankYouModal(redirectUrl) {
+        thankYouModal.classList.add('active');
+        thankYouModal.classList.remove('hidden');
+        redirectLink.href = redirectUrl;
+
+        let countdown = 5;
+        countdownElement.textContent = countdown;
+
+        countdownInterval = setInterval(() => {
+            countdown -= 1;
+            countdownElement.textContent = countdown;
+
+            if (countdown === 0) {
+                clearInterval(countdownInterval);
+                window.location.href = redirectUrl; // Redirect after countdown
+            }
+        }, 1000);
+    }
+
+    // Function to hide the thank you modal
+    function hideThankYouModal() {
+        thankYouModal.classList.remove('active');
+        thankYouModal.classList.add('hidden');
+        clearInterval(countdownInterval); // Stop the countdown if the modal is closed
+    }
+
+    // Automatically load the survey form when the page loads
+    function loadSurveyForm() {
+        fetch('/survey/') // URL to the survey_form view
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to load survey form');
+                }
+                return response.text();
+            })
+            .then(html => {
+                surveyContent.innerHTML = html; // Inject the HTML into the modal
+                addCSRFToken(); // Add CSRF token to the form
+                attachFormSubmitHandler(); // Attach the form submission handler
+                initializeSurveyLogic(); // Initialize survey logic
+                showModal(); // Show the modal
+            })
+            .catch(error => {
+                console.error('Error loading survey form:', error);
+            });
+    }
+
+    // Close the survey modal when the close button is clicked
+    if (closeModal) {
+        closeModal.addEventListener('click', hideModal);
+    }
+
+    // Close the thank you modal when the close button is clicked
+    if (closeThankYouModal) {
+        closeThankYouModal.addEventListener('click', hideThankYouModal);
+    }
+
+    // Automatically load the survey form when the page loads
+    loadSurveyForm();
+
+    // Function to add CSRF token to the form
+    function addCSRFToken() {
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        const form = surveyContent.querySelector('form');
+        if (form) {
+            const csrfInput = document.createElement('input');
+            csrfInput.type = 'hidden';
+            csrfInput.name = 'csrfmiddlewaretoken';
+            csrfInput.value = csrfToken;
+            form.appendChild(csrfInput);
+        }
+    }
+
+    // Function to attach form submission handler
+    function attachFormSubmitHandler() {
+        const surveyForm = surveyContent.querySelector('form');
+        if (!surveyForm) return;
+
+        surveyForm.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent the default form submission
+
+            const formData = new FormData(surveyForm);
+
+            try {
+                const response = await fetch('/modal-survey-submit/', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Hide the survey modal
+                    hideModal();
+
+                    // Show the thank you modal with the redirect URL
+                    showThankYouModal(result.redirect_url || '/thank-you/');
+                } else {
+                    alert(result.message || 'An error occurred while submitting the survey.');
+                }
+            } catch (error) {
+                console.error('Error submitting the survey:', error);
+                alert('An unexpected error occurred. Please try again.');
+            }
+        });
+    }
+
+    // Function to initialize survey logic
+    function initializeSurveyLogic() {
+        const surveyDataElement = document.getElementById('surveyData');
+        if (!surveyDataElement) return;
+
+        const surveyData = JSON.parse(surveyDataElement.textContent);
+        console.log("Parsed survey data:", surveyData);
+
+        const allQuestions = surveyData.questions;
+        const openEndedQuestions = surveyData.openEndedQuestions;
+
+        const questionMap = {};
+        allQuestions.forEach(q => {
+            questionMap[q.id] = q;
+        });
+
+        const openEndedMap = {};
+        openEndedQuestions.forEach(q => {
+            openEndedMap[q.id] = q;
+        });
+
+        const topContainer = document.getElementById('top-container');
+        const bottomContainer = document.getElementById('bottom-container');
+
+        function createMultipleChoiceBlock(question) {
+            const block = document.createElement('div');
+            block.classList.add('question-block');
+            block.id = question.id;
+
+            const p = document.createElement('p');
+            p.innerHTML = `<strong>${question.text}</strong>`;
+            block.appendChild(p);
+
+            question.answers.forEach(answer => {
+                const label = document.createElement('label');
+                label.style.display = 'block';
+
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.name = question.id;
+                input.value = answer.text;
+
+                label.appendChild(input);
+                label.appendChild(document.createTextNode(' ' + answer.text));
+                block.appendChild(label);
+            });
+
+            return block;
+        }
+
+        function createOpenEndedBlock(question) {
+            const block = document.createElement('div');
+            block.classList.add('question-block');
+            block.id = question.id;
+
+            const p = document.createElement('p');
+            p.innerHTML = `<strong>${question.text}</strong>`;
+            block.appendChild(p);
+
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = question.id;
+            input.placeholder = question.placeholder || "Enter your response here...";
+            input.style.width = '100%';
+            block.appendChild(input);
+
+            return block;
+        }
+
+        function showFollowUpQuestions(followUpQuestionIds) {
+            followUpQuestionIds.forEach(questionId => {
+                if (!document.getElementById(questionId)) {
+                    const def = questionMap[questionId];
+                    if (def) {
+                        const block = createMultipleChoiceBlock(def);
+                        topContainer.appendChild(block);
+
+                        block.querySelectorAll('input[type="radio"]').forEach(radio => {
+                            radio.addEventListener('change', event => {
+                                const chosenText = event.target.value;
+                                const chosenAnswer = def.answers.find(a => a.text === chosenText);
+                                if (chosenAnswer && chosenAnswer.followUpQuestionId) {
+                                    showFollowUpQuestions(chosenAnswer.followUpQuestionId);
+                                }
+                            });
+                        });
+                    }
+                }
+            });
+        }
+
+        const q1Def = questionMap['Q1'];
+        if (q1Def) {
+            const q1Block = createMultipleChoiceBlock(q1Def);
+            topContainer.appendChild(q1Block);
+
+            q1Block.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.addEventListener('change', event => {
+                    ['Q2a', 'Q2b', 'Q3a', 'Q3b', 'Q3c'].forEach(id => removeIfExists(id));
+
+                    const chosenText = event.target.value;
+                    const chosenAnswer = q1Def.answers.find(a => a.text === chosenText);
+                    if (chosenAnswer && chosenAnswer.followUpQuestionId) {
+                        showFollowUpQuestions(chosenAnswer.followUpQuestionId);
+                    }
+                });
+            });
+        }
+
+        function removeIfExists(id) {
+            const el = document.getElementById(id);
+            if (el) el.remove();
+        }
+
+        // Show standard questions (Q4, Q5, Q6, Q7, Q8)
+        const q4Def = questionMap['Q4'];
+        if (q4Def) {
+            bottomContainer.appendChild(createMultipleChoiceBlock(q4Def));
+        }
+        const q5Def = questionMap['Q5'];
+        if (q5Def) {
+            bottomContainer.appendChild(createMultipleChoiceBlock(q5Def));
+        }
+
+        ['Q6', 'Q7', 'Q8'].forEach(oeId => {
+            const def = openEndedMap[oeId];
+            if (def) {
+                bottomContainer.appendChild(createOpenEndedBlock(def));
+            }
+        });
+    }
+});
+/*******************************************************
+ * WARNING: DO NOT MODIFY THE CODE ABOVE
+ * This code is critical for the functionality of the application.
+ * Modifying this code will cause unexpected behavior or break features.
+ *******************************************************/
