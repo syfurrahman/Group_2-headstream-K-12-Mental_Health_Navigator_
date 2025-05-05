@@ -148,7 +148,9 @@ python manage.py runserver
 
 3. Refresh the browser to see the updates.
 
-After Adding New Static Files (CSS, JS, Images)
+After Adding New Static Files (CSS, JS, Images) 
+
+See [Project Structure](#project-structure) for where to put the files correctly
 
 1. Collect static files:
 
@@ -266,11 +268,35 @@ First ensure that the CSS styles page is linked correctly:
 
 Ensure the view is defined in views.py and the URL pattern is added in urls.py.
 
-2. load static Token Missing
+2. Errors for page links when you click the navigation and it shows an error:
+
+```html
+
+<a href="{% url 'index' %}" class="logo">K-12 Mental Health Tech</a>
+
+<li><a href="{% url 'aboutus' %}">About</a></li>
+
+<li><a href="{% url 'assess' %}"> Assess Student Needs</a><li>
+<li><a href="{% url 'stakeholder' %}">Plan for Stakeholder Engagement</a></li>
+<li><a href= "{% url 'selectSolution' %}">Select Relevant Solutions</a></li>
+<li><a href="{% url 'fundingStrategy' %}">Develop a Funding Strategy</a></li>
+<li><a href="{% url 'implementSolution' %}">Implement your Chosen Solution</a></li> 
+
+<li><a href="{% url 'methuen' %}">Methuen</a></li>
+<li><a href="{% url 'case2' %}">Rim of the World Unified</a></li>
+<li><a href="{% url 'case3' %}">Uplift Education</a></li>
+<li><a href="{% url 'case4' %}">Judson ISD</a></li>
+<li><a href="{% url 'case5' %}">Cherry Creek</a></li>
+
+<li><a href="{% url 'index' %}#contact">Contact</a></li>
+
+```
+
+3. load static Token Missing
 
 Ensure {% load static %} is included in all forms.
 
-3. JavaScript Not Working
+4. JavaScript Not Working
 Make sure your script is referenced properly:
 
 ```html
