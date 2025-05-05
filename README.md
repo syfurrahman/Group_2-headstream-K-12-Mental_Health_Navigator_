@@ -223,6 +223,18 @@ http://127.0.0.1:8000/.
 - The `main` branch is protected. Do not push directly to it.
 - All updates must go through pull requests and be reviewed before merging.
 
+### Step 9: Manage Your Feature Branch
+- After your pull request is merged, you can either delete the feature branch or keep it for future use.
+- If you choose to delete the branch, you can do so on GitHub or using the following command:
+    ```bash
+    git branch -d feature/new-task
+    ```
+- Regardless of your choice, make sure to switch back to the `main` branch:
+    ```bash
+    git checkout main
+    ```
+- Redo all the steps for any new tasks or features.
+
 ### Step 9: Stop the Server (Optional)
 To stop the development server:
 - On Mac: Press `Option + C`.
