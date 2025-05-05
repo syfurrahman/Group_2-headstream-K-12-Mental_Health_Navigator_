@@ -113,6 +113,8 @@ python manage.py runserver
 http://127.0.0.1:8000/
 ```
 
+
+
 ---
 
 ## Running the Project
@@ -137,6 +139,13 @@ http://127.0.0.1:8000/.
 ```
 ---
 ## Making Changes
+
+Before making changes do:
+
+```bash
+git pull origin main
+```
+
 After Making Changes to Code or Templates
 
 1. Save your changes.
@@ -168,6 +177,24 @@ python manage.py migrate
 
 ```bash
 python manage.py runserver
+```
+4. To terminate server:
+
+Press Option C (Mac) or Press Ctrl + C (Windows) in the terminal where the server is running.
+
+5. To update changes on Github do each: 
+
+```bash
+
+git pull origin main
+
+git add -all
+
+git init
+
+git commit -m "Comment"
+
+git push
 ```
 
 ---
