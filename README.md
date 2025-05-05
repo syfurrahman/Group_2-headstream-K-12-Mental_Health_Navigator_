@@ -2,6 +2,7 @@
 
 This project is designed to combine both the frontend and backend for the K-12 Mental Health Navigator. It helps schools and districts choose and use effective digital tools for student mental health and well-being.
 
+
 ## Navigating to Pages
 
 Here are the links to access different pages of the application:
