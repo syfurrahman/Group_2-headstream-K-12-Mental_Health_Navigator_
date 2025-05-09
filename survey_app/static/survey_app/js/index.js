@@ -221,12 +221,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Function to show the thank you modal
-    function showThankYouModal(topLinks) {
+    let topLinks = []; // Define topLinks globally
+
+    function showThankYouModal(links) {
+        topLinks = links; // Assign the links to the global variable
         const topLinksContainer = document.getElementById('topLinksContainer');
-    
+
         thankYouModal.classList.add('active');
         thankYouModal.classList.remove('hidden');
-    
+
         // Populate the top 5 links dynamically as clickable boxes
         topLinksContainer.innerHTML = ''; // Clear any existing content
         topLinks.forEach(link => {
