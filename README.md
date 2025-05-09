@@ -244,6 +244,18 @@ To stop the development server:
 
 ---
 ## Linking Pages
+
+Calling survey results use the global variable topLinks
+
+Example Usage in Another Script:
+
+```js
+console.log(topLinks); // Access the top links
+topLinks.forEach(link => {
+    console.log(`Rank ${link.rank}: ${link.name} (${link.url})`);
+});
+```
+
 Adding Links to Navigation
 To add a new page to the navigation menu:
 
