@@ -204,8 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const thankYouModal = document.getElementById('thankYouModal');
     const closeThankYouModal = document.getElementById('closeThankYouModal');
-    const countdownElement = document.getElementById('countdown');
-    const redirectLink = document.getElementById('redirectLink');
 
     let countdownInterval;
 
@@ -219,26 +217,29 @@ document.addEventListener('DOMContentLoaded', () => {
     function hideModal() {
         modal.classList.remove('active');
         modal.classList.add('hidden');
+        sessionStorage.setItem('surveyShown', 'true'); // Mark the survey as shown
     }
 
     // Function to show the thank you modal
-    function showThankYouModal(redirectUrl) {
+    function showThankYouModal(topLinks) {
+        const topLinksContainer = document.getElementById('topLinksContainer');
+    
         thankYouModal.classList.add('active');
         thankYouModal.classList.remove('hidden');
-        redirectLink.href = redirectUrl;
-
-        let countdown = 5;
-        countdownElement.textContent = countdown;
-
-        countdownInterval = setInterval(() => {
-            countdown -= 1;
-            countdownElement.textContent = countdown;
-
-            if (countdown === 0) {
-                clearInterval(countdownInterval);
-                window.location.href = redirectUrl; // Redirect after countdown
-            }
-        }, 1000);
+    
+        // Populate the top 5 links dynamically as clickable boxes
+        topLinksContainer.innerHTML = ''; // Clear any existing content
+        topLinks.forEach(link => {
+            const linkBox = document.createElement('div');
+            linkBox.classList.add('link-box');
+            linkBox.innerHTML = `
+                <span class="rank-label">RANK ${link.rank}</span>
+            `;
+            linkBox.addEventListener('click', () => {
+                window.open(link.url, '_blank'); // Open the link in a new tab
+            });
+            topLinksContainer.appendChild(linkBox);
+        });
     }
 
     // Function to hide the thank you modal
@@ -279,8 +280,10 @@ document.addEventListener('DOMContentLoaded', () => {
         closeThankYouModal.addEventListener('click', hideThankYouModal);
     }
 
-    // Automatically load the survey form when the page loads
-    loadSurveyForm();
+    // Check if the survey has already been shown in this session
+    if (!sessionStorage.getItem('surveyShown')) {
+        loadSurveyForm(); // Load and show the survey form
+    }
 
     // Function to add CSRF token to the form
     function addCSRFToken() {
@@ -299,26 +302,29 @@ document.addEventListener('DOMContentLoaded', () => {
     function attachFormSubmitHandler() {
         const surveyForm = surveyContent.querySelector('form');
         if (!surveyForm) return;
-
+    
         surveyForm.addEventListener('submit', async (event) => {
             event.preventDefault(); // Prevent the default form submission
-
+    
             const formData = new FormData(surveyForm);
-
+    
             try {
                 const response = await fetch('/modal-survey-submit/', {
                     method: 'POST',
                     body: formData,
+                    headers: {
+                        'X-CSRFToken': getCSRFToken(), // Include the CSRF token
+                    },
                 });
-
+    
                 const result = await response.json();
-
+    
                 if (result.success) {
                     // Hide the survey modal
                     hideModal();
-
-                    // Show the thank you modal with the redirect URL
-                    showThankYouModal(result.redirect_url || '/thank-you/');
+    
+                    // Show the thank you modal with the top links
+                    showThankYouModal(result.top_links || []);
                 } else {
                     alert(result.message || 'An error occurred while submitting the survey.');
                 }
@@ -327,6 +333,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('An unexpected error occurred. Please try again.');
             }
         });
+    }
+
+    // Helper function to get the CSRF token
+    function getCSRFToken() {
+        const cookieValue = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('csrftoken='))
+            ?.split('=')[1];
+        return cookieValue || '';
     }
 
     // Function to initialize survey logic

@@ -95,16 +95,20 @@
 <!-- DO NOT REMOVE OR MODIFY THE CODE ABOVE -->
 <!-- DO NOT REMOVE OR MODIFY THE CODE BELOW -->
 <!-- Thank You Modal -->
+
 <div id="thankYouModal" class="modal-overlay hidden">
     <div class="modal-content">
         <button class="close-modal" id="closeThankYouModal">✕</button>
         <div id="thankYouContent">
             <h1>Thank you for submitting!</h1>
-            <p>You are going to be redirected in <span id="countdown">5</span> seconds.</p>
-            <p>If you are not redirected, click <a id="redirectLink" href="{{ chosen_url }}" >here</a>.</p>
+
+            <!-- Display Top 5 Links -->
+            <h3>Top 5 Recommendations:</h3>
+            <div id="topLinksContainer" class="link-box-container"></div>
         </div>
     </div>
 </div>
+
 <!-- DO NOT REMOVE OR MODIFY THE CODE ABOVE -->
     <!-- Hero Section -->
     <section class="hero">

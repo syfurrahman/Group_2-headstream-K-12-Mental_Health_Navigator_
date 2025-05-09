@@ -73,8 +73,19 @@
         Submitted time: {{ submission.submitted_time|date:"Y-m-d H:i:s" }}
       </p>
 
-      <p><strong>Redirected to:</strong> {{ submission.chosen_redirection|default:"None" }}</p>
-      
+      <h3>Top 5 Recommendations:</h3>
+      <ol>
+        {% for link in submission.top_links %}
+          <li>
+            <strong>Rank {{ link.rank }}:</strong> 
+            <a href="{{ link.url }}" target="_blank">{{ link.name }}</a> 
+            (Tally: {{ link.tally }})
+          </li>
+        {% empty %}
+          <li>No recommendations available.</li>
+        {% endfor %}
+      </ol>
+
       <h3>Answers:</h3>
       <ul class="answers">
         {% for answer in submission.answers %}

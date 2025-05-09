@@ -97,16 +97,55 @@ def logout_view(request):
 @login_required
 def dashboard_view(request):
     submissions = SurveySubmission.objects.all().order_by('-submitted_time')
+    page_links = load_page_links()  # Load the pageLinks.json file
     current_time = now()
 
     data = []
     for submission in submissions:
         answers = SurveyAnswer.objects.filter(submission=submission).order_by('question_id')
+        redirection_key = submission.chosen_redirection
+        redirection_url = page_links.get(redirection_key, "None")  # Resolve the URL from the key
+
+        # Fetch top 5 links for the submission
+        tally = {}
+        for answer in answers:
+            matching_question = next(
+                (q for q in load_survey_definition()['questions'] if q['id'] == answer.question_id),
+                None
+            )
+            if matching_question and matching_question.get('type') == 'multiple-choice':
+                chosen_ans = next(
+                    (ans for ans in matching_question['answers'] if ans['text'] == answer.answer_text),
+                    None
+                )
+                if chosen_ans:
+                    for r_link in chosen_ans.get('pageIds', []):
+                        tally[r_link] = tally.get(r_link, 0) + 1
+
+        sorted_tally = sorted(tally.items(), key=lambda x: x[1], reverse=True)[:5]
+        top_links = [
+            {
+                'rank': i + 1,
+                'name': page_links.get(r_key, 'Unknown'),
+                'url': page_links.get(r_key, '#'),
+                'tally': count
+            }
+            for i, (r_key, count) in enumerate(sorted_tally)
+        ]
+
         data.append({
             'id': submission.id,
             'submitted_time': submission.submitted_time,
-            'chosen_redirection': submission.chosen_redirection,
-            'answers': answers
+            'chosen_redirection_key': redirection_key,  # Include the key (e.g., "R1")
+            'chosen_redirection_url': redirection_url,  # Include the resolved URL
+            'top_links': top_links,  # Include the top 5 links
+            'answers': [
+                {
+                    'question_id': answer.question_id,
+                    'answer_text': answer.answer_text
+                }
+                for answer in answers
+            ]
         })
 
     return render(request, 'survey_app/dashboard.html', {
@@ -148,57 +187,68 @@ def home(request):
 @csrf_protect
 def modal_survey_submit(request):
     if request.method == 'POST':
-        # Load the survey definition
-        survey_data = load_survey_definition()
-        all_question_ids = [q['id'] for q in survey_data['questions']]
-        open_ended_ids = [q['id'] for q in survey_data['openEndedQuestions']]
-        all_ids = all_question_ids + open_ended_ids
+        try:
+            # Load the survey definition and page links
+            survey_data = load_survey_definition()
+            page_links = load_page_links()
+            all_question_ids = [q['id'] for q in survey_data['questions']]
+            open_ended_ids = [q['id'] for q in survey_data['openEndedQuestions']]
+            all_ids = all_question_ids + open_ended_ids
 
-        # Check if the form has answers
-        has_answers = any(q_id in request.POST for q_id in all_ids)
-        if not has_answers:
-            return JsonResponse({'success': False, 'message': 'Please answer at least one question before submitting.'})
+            # Check if the form has answers
+            has_answers = any(q_id in request.POST for q_id in all_ids)
+            if not has_answers:
+                return JsonResponse({'success': False, 'message': 'Please answer at least one question before submitting.'})
 
-        # Save the user's responses
-        submitted_time = now()
-        submission = SurveySubmission.objects.create(submitted_time=submitted_time)
-        tally = {}
+            # Save the user's responses
+            submitted_time = now()
+            submission = SurveySubmission.objects.create(submitted_time=submitted_time)
+            tally = {}
 
-        for q_id in all_ids:
-            if q_id in request.POST:
-                user_answer = request.POST[q_id]
-                SurveyAnswer.objects.create(
-                    submission=submission,
-                    question_id=q_id,
-                    answer_text=user_answer
-                )
-                matching_question = next(
-                    (question for question in survey_data['questions'] if question['id'] == q_id), 
-                    None
-                )
-                if matching_question and matching_question.get('type') == 'multiple-choice':
-                    chosen_ans = next(
-                        (ans for ans in matching_question['answers'] if ans['text'] == user_answer),
+            for q_id in all_ids:
+                if q_id in request.POST:
+                    user_answer = request.POST[q_id]
+                    SurveyAnswer.objects.create(
+                        submission=submission,
+                        question_id=q_id,
+                        answer_text=user_answer
+                    )
+                    matching_question = next(
+                        (question for question in survey_data['questions'] if question['id'] == q_id), 
                         None
                     )
-                    if chosen_ans:
-                        for r_link in chosen_ans.get('pageIds', []):
-                            tally[r_link] = tally.get(r_link, 0) + 1
+                    if matching_question and matching_question.get('type') == 'multiple-choice':
+                        chosen_ans = next(
+                            (ans for ans in matching_question['answers'] if ans['text'] == user_answer),
+                            None
+                        )
+                        if chosen_ans:
+                            for r_link in chosen_ans.get('pageIds', []):
+                                tally[r_link] = tally.get(r_link, 0) + 1
 
-        # Determine the redirection link
-        if tally:
-            sorted_tally = sorted(tally.items(), key=lambda x: x[1], reverse=True)
-            best_r_key, highest_count = sorted_tally[0]
-            submission.chosen_redirection = best_r_key
-            submission.save()
-            chosen_url = load_page_links().get(best_r_key, '/thank-you/')
-        else:
-            submission.chosen_redirection = None
-            submission.save()
-            chosen_url = '/thank-you/'
+            # Determine the top 5 links
+            top_links = []
+            if tally:
+                sorted_tally = sorted(tally.items(), key=lambda x: x[1], reverse=True)[:5]
+                top_links = [
+                    {
+                        'rank': i + 1,
+                        'name': page_links.get(r_key, 'Unknown'),
+                        'url': page_links.get(r_key, '#'),  # Ensure the correct URL is used
+                        'tally': count
+                    }
+                    for i, (r_key, count) in enumerate(sorted_tally)
+                ]
 
-        # Return a JSON response with the redirection link
-        return JsonResponse({'success': True, 'redirect_url': chosen_url})
+            # Return a JSON response with the top 5 links
+            return JsonResponse({
+                'success': True,
+                'top_links': top_links  # Pass the top 5 links to the frontend
+            })
+        except Exception as e:
+            # Log the error for debugging
+            print(f"Error processing survey submission: {e}")
+            return JsonResponse({'success': False, 'message': 'An unexpected error occurred.'})
 
     return JsonResponse({'success': False, 'message': 'Invalid request method.'})
 
