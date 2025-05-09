@@ -7,7 +7,7 @@ This project is designed to combine both the frontend and backend for the K-12 M
 
 Here are the links to access different pages of the application:
 
-- **[Survey Dashboard](http://127.0.0.1:8000/dashboard/):** The main landing page of the application.
+- **[Survey Dashboard](http://127.0.0.1:8000/dashboard/):** All of survey data are store here.
 - **[Home/Index](http://127.0.0.1:8000/):** The main landing page of the application.
 - **[About Us](http://127.0.0.1:8000/aboutus/):** Learn more about the purpose and mission of the project.
 - **[Explore](http://127.0.0.1:8000/explore/):** Discover tools and resources for mental health support.
