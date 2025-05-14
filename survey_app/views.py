@@ -190,7 +190,8 @@ def modal_survey_submit(request):
         try:
             # Load the survey definition and page links
             survey_data = load_survey_definition()
-            page_links = load_page_links()
+            page_links = load_page_links()  # Load the updated JSON file
+
             all_question_ids = [q['id'] for q in survey_data['questions']]
             open_ended_ids = [q['id'] for q in survey_data['openEndedQuestions']]
             all_ids = all_question_ids + open_ended_ids
@@ -214,7 +215,7 @@ def modal_survey_submit(request):
                         answer_text=user_answer
                     )
                     matching_question = next(
-                        (question for question in survey_data['questions'] if question['id'] == q_id), 
+                        (question for question in survey_data['questions'] if question['id'] == q_id),
                         None
                     )
                     if matching_question and matching_question.get('type') == 'multiple-choice':
@@ -223,22 +224,22 @@ def modal_survey_submit(request):
                             None
                         )
                         if chosen_ans:
-                            for r_link in chosen_ans.get('pageIds', []):
-                                tally[r_link] = tally.get(r_link, 0) + 1
+                            for r_key in chosen_ans.get('pageIds', []):
+                                tally[r_key] = tally.get(r_key, 0) + 1
 
             # Determine the top 5 links
             top_links = []
             if tally:
                 sorted_tally = sorted(tally.items(), key=lambda x: x[1], reverse=True)[:5]
-                top_links = [
-                    {
+                for i, (r_key, count) in enumerate(sorted_tally):
+                    # Fetch data from the updated pageLinks.json
+                    resource = page_links.get(r_key, {})
+                    top_links.append({
                         'rank': i + 1,
-                        'name': page_links.get(r_key, 'Unknown'),
-                        'url': page_links.get(r_key, '#'),  # Ensure the correct URL is used
-                        'tally': count
-                    }
-                    for i, (r_key, count) in enumerate(sorted_tally)
-                ]
+                        'title': resource.get('title', 'Unknown Title'),
+                        'description': resource.get('description', 'No description available.'),
+                        'url': resource.get('url', '#')
+                    })
 
             # Return a JSON response with the top 5 links
             return JsonResponse({

@@ -223,21 +223,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to show the thank you modal
     function showThankYouModal(topLinks) {
         const topLinksContainer = document.getElementById('topLinksContainer');
-    
+
         thankYouModal.classList.add('active');
         thankYouModal.classList.remove('hidden');
-    
-        // Populate the top 5 links dynamically as clickable boxes
-        topLinksContainer.innerHTML = ''; // Clear any existing content
+
+        // Clear any existing content
+        topLinksContainer.innerHTML = '';
+
+        // Create the new layout for the top 5 links
         topLinks.forEach(link => {
             const linkBox = document.createElement('div');
-            linkBox.classList.add('link-box');
+            linkBox.classList.add('flashcard');
+
+            // Set the content for the flashcard
             linkBox.innerHTML = `
-                <span class="rank-label">RANK ${link.rank}</span>
+                <div class="flashcard-banner">${link.title}</div>
+                <div class="flashcard-body">${link.description}</div>
             `;
+
+            // Add click event to open the link in a new tab
             linkBox.addEventListener('click', () => {
                 window.open(link.url, '_blank'); // Open the link in a new tab
             });
+
+            // Append the flashcard to the container
             topLinksContainer.appendChild(linkBox);
         });
     }

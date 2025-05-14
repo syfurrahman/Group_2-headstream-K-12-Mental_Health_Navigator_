@@ -70,12 +70,20 @@ All images need to be placed in survey_project/survey_app/static/survey_app/imag
 ## Setup Instructions
 Prerequisites
 Python: Ensure Python 3.9 or higher is installed.
+
 Django: Install Django using pip:
-django
 
 ```bash
 pip install django
 ```
+
+Requests and dotenv: Install the required packages using pip:
+
+```bash
+pip install requests
+pip install python-dotenv
+```
+
 
 Steps to Set Up the Project
 Clone the repository:
