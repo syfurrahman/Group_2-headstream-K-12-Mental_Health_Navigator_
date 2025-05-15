@@ -241,7 +241,7 @@ http://127.0.0.1:8000/.
 
 ### Step 9: Stop the Server (Optional)
 To stop the development server:
-- On Mac: Press `Option + C`.
+- On Mac: Press `control + C`.
 - On Windows: Press `Ctrl + C`.
 
 

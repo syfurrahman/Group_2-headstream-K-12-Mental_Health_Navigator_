@@ -1,21 +1,82 @@
 {
-    "R1": "http://127.0.0.1:8000",
-    "R2": "http://127.0.0.1:8000/assess/",
-    "R3": "http://127.0.0.1:8000/stakeholder/",
-    "R4": "http://127.0.0.1:8000/selectSolution/", 
-    "R5": "http://127.0.0.1:8000/fundingStrategy/",
-    "R6": "http://127.0.0.1:8000/implementSolution/",
-    "R10": "https://www.k12mentalhealthtech.org/mental-health-challenge-areas/develop-life-skills-and-character-building-skills",
-    "R11": "https://www.k12mentalhealthtech.org/mental-health-challenge-areas/promote-social-and-school-connectedness",
-    "R12": "https://www.k12mentalhealthtech.org/mental-health-challenge-areas/equip-staff-and-students-to-recognize-and-respond-to-distress",
-    "R13": "https://www.k12mentalhealthtech.org/mental-health-challenge-areas/ensure-student-access-to-effective-mental-health-treatment",
-    "R20": "http://127.0.0.1:8000/methuen/",
-    "R21": "http://127.0.0.1:8000/case2/",
-    "R22": "http://127.0.0.1:8000/case3/",
-    "R23": "http://127.0.0.1:8000/case4/",
-    "R24": "http://127.0.0.1:8000/case5/",
-    "R30": "https://www.k12mentalhealthtech.org/product-index",
-    "R40": "http://127.0.0.1:8000/aboutus/",
-    "R50": "https://www.k12mentalhealthtech.org/product-disclaimer"
-  }
+    "R1": {
+      "url": "http://127.0.0.1:8000",
+      "title": "Home",
+      "description": "Welcome to the K12 Mental Health Tech Challenge. This platform is designed to help you navigate the challenges and solutions in mental health technology for K-12 education."
+    },
+    
+    "R2": { "url": "http://127.0.0.1:8000/assess/",
+      "title": "Assess Student Needs",
+      "description": "This section provides a comprehensive assessment of the current mental health landscape in K-12 education. It includes various tools and resources to evaluate the needs and challenges faced by students and educators."
+    },
+
+    "R3": { "url": "http://127.0.0.1:8000/stakeholder/",
+      "title": "Identify Stakeholders",
+      "description": "This section helps you identify key stakeholders in the mental health ecosystem, including students, parents, educators, and mental health professionals. Understanding their roles and perspectives is crucial for effective intervention."
+    },
+
+    "R4": { "url": "http://127.0.0.1:8000/selectSolution/", 
+      "title": "Select Solution",
+      "description": "This section provides a curated list of potential solutions to address the identified mental health challenges. Each solution is evaluated based on its effectiveness, feasibility, and alignment with stakeholder needs."
+    },
+
+    "R5": { "url": "http://127.0.0.1:8000/fundingStrategy/",
+      "title": "Funding Strategy",
+      "description": "This section outlines various funding strategies to support the implementation of selected mental health solutions. It includes information on grants, partnerships, and other financial resources."
+    },
+
+    "R6": { "url": "http://127.0.0.1:8000/implementSolution/",
+      "title": "Implement Solution",
+      "description": "This section provides a step-by-step guide to implementing the selected mental health solutions in K-12 settings. It includes best practices, case studies, and resources for successful implementation."
+    },
+
+    "R10": { "url": "https://www.k12mentalhealthtech.org/mental-health-challenge-areas/develop-life-skills-and-character-building-skills",
+      "title": "Develop Life Skills and Character Building Skills",
+      "description": "This section focuses on developing essential life skills and character traits in students to promote resilience and well-being. It includes resources and programs that support character education."
+    },
+    "R11": { "url": "https://www.k12mentalhealthtech.org/mental-health-challenge-areas/promote-social-and-school-connectedness",
+      "title": "Promote Social and School Connectedness",
+      "description": "This section emphasizes the importance of social connections and a sense of belonging in schools. It includes strategies and programs to foster positive relationships among students and staff."
+    },
+    "R12": { "url": "https://www.k12mentalhealthtech.org/mental-health-challenge-areas/equip-staff-and-students-to-recognize-and-respond-to-distress",
+      "title": "Equip Staff and Students to Recognize and Respond to Distress",
+      "description": "This section provides training and resources for staff and students to recognize signs of distress and respond appropriately. It includes mental health first aid training and crisis intervention strategies."
+    },
+    "R13": { "url": "https://www.k12mentalhealthtech.org/mental-health-challenge-areas/ensure-student-access-to-effective-mental-health-treatment",
+      "title": "Ensure Student Access to Effective Mental Health Treatment",
+      "description": "This section focuses on ensuring that students have access to effective mental health treatment and support services. It includes information on telehealth, school-based mental health services, and community resources."
+    },
+    "R20": { "url": "http://127.0.0.1:8000/methuen/",
+      "title": "Methuen Case Study",
+      "description": "This section provides a case study of Methuen, Massachusetts, highlighting the mental health challenges faced by the community and the solutions implemented to address them."
+    },
+    "R21": { "url": "http://127.0.0.1:8000/case2/",
+      "title": "Case Study 2",
+      "description": "This section provides a case study of another community, highlighting the mental health challenges faced and the solutions implemented to address them."
+    },
+    "R22": { "url": "http://127.0.0.1:8000/case3/",
+      "title": "Case Study 3",
+      "description": "This section provides a case study of a third community, highlighting the mental health challenges faced and the solutions implemented to address them."
+    },
+    "R23": { "url": "http://127.0.0.1:8000/case4/",
+      "title": "Case Study 4",
+      "description": "This section provides a case study of a fourth community, highlighting the mental health challenges faced and the solutions implemented to address them."
+    },
+    "R24": { "url": "http://127.0.0.1:8000/case5/",
+      "title": "Case Study 5",
+      "description": "This section provides a case study of a fifth community, highlighting the mental health challenges faced and the solutions implemented to address them."
+    },
+    "R30": { "url": "https://www.k12mentalhealthtech.org/product-index",
+      "title": "Product Index",
+      "description": "This section provides a comprehensive index of mental health products and services available for K-12 education. It includes detailed descriptions, evaluations, and user reviews."
+    },
+    "R40": { "url": "http://127.0.0.1:8000/aboutus/",
+      "title": "About Us",
+      "description": "This section provides information about the K12 Mental Health Tech Challenge, its mission, and the team behind it. It includes details on how to get involved and support the initiative."
+    },
+    "R50": { "url": "https://www.k12mentalhealthtech.org/product-disclaimer",
+      "title": "Product Disclaimer",
+      "description": "This section provides important disclaimers regarding the products and services listed in the product index. It includes information on product evaluations, user reviews, and potential limitations."
+    }
+}
   
