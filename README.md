@@ -77,15 +77,18 @@ django
 pip install django
 ```
 
+Requests and dotenv: Install the required packages using pip:
+
+```bash
+pip install requests
+pip install python-dotenv
+```
+
 Steps to Set Up the Project
 Clone the repository:
 
 ```bash
 git clone https://github.com/syfurrahman/Group_2-headstream-K-12-Mental_Health_Navigator_.git
-```
-
-```bash
-cd survey_project
 ```
 
 2. Install dependencies that are prompted SQLlite
