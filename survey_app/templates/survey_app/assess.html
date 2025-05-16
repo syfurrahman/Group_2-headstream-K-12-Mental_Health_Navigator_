@@ -53,28 +53,12 @@
         </div>
     </header>
 
-    <!-- Chat Bubble -->
-    <button id="floatingChatButton" class="chat-bubble">💬</button>
 
-    <!-- Chat Modal -->
-    <div id="chatModal" class="chat-modal hidden">
-    <div class="chat-header">
-        <span>Ask Us Anything</span>
-        <button id="closeChat" class="close-button">✕</button>
-    </div>
-
-    <div class="chat-body" id="chatBody">
-        <p id="initialPrompt"><em>Hi! How can we help you today?</em></p>
-    </div>
-
-    <div class="chat-input">
-        <input type="text" id="chatInput" placeholder="Type a message..." />
-        <button id="sendMessage">Send</button>
-    </div>
-    </div>
    
 
-    <!-- Main Content -->
+<!-- Main Content -->
+
+    
     <div class="page-title">
         <h3>Assess Student Needs</h3>
     </div>
@@ -89,11 +73,11 @@
          </div>
         
     </section>
+<div class="page-layout">
+    <div class="mainContent">
    
-    <section class="content-section">
         <div class="container">
-           
-            <h2 class="section-title">Conduct A Needs Assessment</h2>
+            <h2 class="section-title" id = "conduct-assessment">Conduct A Needs Assessment</h2>
                 <p> Conducting a needs assessment is a critical step for schools or districts. A needs assessment evaluates how effectively existing services and supports meet student needs and identifies system strengths to leverage. The process should be collaborative, integrating available data and perspectives from a diverse group of individuals who are part of or affected by the system. </p>
                 <p><strong><br>A diverse and well-structured team is instrumental in creating a comprehensive and inclusive approach to mental health assessment and support. Although not all stakeholders will engage in every step of the process, together they will clearly define the objectives, timelines, and responsibilities.</strong></p>
 
@@ -140,13 +124,11 @@
                             </li>
                         </ul>
                     </div>
-                    </div>
+                </div>
               
-
-           
     
-        <h2 class="section-title">Conduct Resource Mapping</h2>
-            <p>Resource mapping creates a visual map or list of available services and resources in a community. It helps identify important local resources, improve access and awareness, reduce duplication of services, and enhance communication and collaboration. Assessing both current and new products and programs allows your school or district to ensure you’re providing the most effective and comprehensive mental health services. By evaluating existing services, you can identify areas of success and pinpoint where improvements are needed. It ensures that schools use all available supports effectively to meet student needs.</p>
+            <h2 class="section-title" id = "conduct-mapping">Conduct Resource Mapping</h2>
+                <p>Resource mapping creates a visual map or list of available services and resources in a community. It helps identify important local resources, improve access and awareness, reduce duplication of services, and enhance communication and collaboration. Assessing both current and new products and programs allows your school or district to ensure you’re providing the most effective and comprehensive mental health services. By evaluating existing services, you can identify areas of success and pinpoint where improvements are needed. It ensures that schools use all available supports effectively to meet student needs.</p>
                 <div class="section-accordion">
                     <h3 class="accordion">Catalog existing mental health services and programs <span class="arrow">+</span></h3>
                         <div class="panel">
@@ -178,46 +160,60 @@
                             </div>
                     </div>
 
-        <h2 class="section-title">Embark On Targeted Action Planning</h2>
-            <p>Building on the needs assessment and resource mapping, action planning serves as the strategic culmination of those foundational steps. By identifying specific goals, allocating resources effectively, and implementing targeted interventions, your school or district can address the unique needs of the student population with precision and purpose.</p>
-            <p>Proactively planning ensures a coordinated effort across all stakeholders, fostering a collaborative environment that promotes continuous improvement. This process helps set clear priorities, track progress, and make data-informed decisions, ultimately leading to enhanced educational outcomes and a supportive, inclusive school culture.</p>
-            <div class="panel-box">
-                <div class="panel-content">
-            <ol>
-                <li class="item-accordion"><strong>1. Create a detailed report with findings, needs, and recommendation.</strong></li>
-                    <p class="item-panel">Share it with everyone involved, including the school board, administrators, teachers, parents, and students, for their feedback.</p>
-                <li class="item-accordion"><strong>2. Develop a strategic plan based on the assessment.</strong></li>
-                    <p class="item-panel">Your plan should include goals, strategies, action steps, timelines, responsible parties, and measurable outcomes. It should also include a plan for how to effectively sunset any programs you’ve decided to discontinue, making sure there are comparable services in place to minimize any potential negative impacts.</p>
-                <li class="item-accordion"><strong>3. Use SMART goals — those that are specific, measurable, attainable, realistic, relevant, results-oriented, and time-bound.</strong></li>
-                    <p class="item-panel">The strategic plan should also explain how the school or district will use pilot programs or tools in select schools to test their impact, gather user feedback, and make necessary adjustments before wider implementation.</p>
-                <li class="item-accordion"><strong>4. Engage stakeholders to better understand and address mental health needs in a school or district.</strong> </li>
-                    <div class="item-panel">
-                    <p>This process continuously involves students, parents and caregivers, school staff, and community partners. <a href="/client/Journey/stakeholder.html">By involving these key stakeholders</a>, schools can better assess and address the mental health needs of students, ensuring that all voices are heard and all resources are used well.</p>
-                    <ul >
-                        <li><strong>Hear students’ voices by using surveys, conducting focus groups, and including students on the task force.</strong> Create safe and supportive spaces for students to share their experiences in order to gather honest and useful feedback.</li>
-                        <li><strong>Hold town hall meetings and send out surveys to parents and caregivers to gather their concerns and suggestions.</strong> Provide resources and information sessions to educate about mental health issues and support systems, encouraging a team effort for student well-being.</li>
-                        <li><strong>Include teachers, administrators, and support staff in discussions and surveys.</strong> It is important to understand their views on student mental health. Offering professional development on addressing mental health issues equips staff with the skills needed to support students.</li>
-                        <li><strong>Work with local mental health organizations, health care providers, and social services.</strong> This allows your school or district to gather community-based data and coordinate support. Involving community stakeholders in planning ensures that community resources and expertise are used effectively.</li>
-                    </ul>
-                </div>
-                
+            <h2 class="section-title" id ="action-planning">Embark On Targeted Action Planning</h2>
+                <p>Building on the needs assessment and resource mapping, action planning serves as the strategic culmination of those foundational steps. By identifying specific goals, allocating resources effectively, and implementing targeted interventions, your school or district can address the unique needs of the student population with precision and purpose.</p>
+                <p>Proactively planning ensures a coordinated effort across all stakeholders, fostering a collaborative environment that promotes continuous improvement. This process helps set clear priorities, track progress, and make data-informed decisions, ultimately leading to enhanced educational outcomes and a supportive, inclusive school culture.</p>
             
-                <li class="item-accordion"><strong>5. Research evidence-based mental health programs, tools, and resources that could fill identified gaps.</strong></li>
-                    <p class="item-panel">When evaluating these <a href= "/client/Journey/selectSolution.html">external products</a>, consider factors such as cultural relevance, <a href= "/client/Journey/fundingStrategy.html">cost</a>, scalability, and ease of <a href= "/client/Journey/implementSolution.html">implementation</a>.</p>
-                <li class="item-accordion"><strong>6. Evaluate new products on a rubric.</strong></li>
-                    <p class="item-panel">Factors to consider for a rubric can include things like cultural relevance, cost, scalability, and ease of implementation. That ensures that any adopted solutions are practical and sustainable.</p>
-          </ol>
-          </div>
-          </div>
-
-        
+            <div class="flash-card-container">
+                <div class="flash-card" id="card">
+                    <div class="front"id="front-text"></div>
+                    <div class="back"id="back-text"></div>
+                </div>
+                <button class="prev-card" id="prev-btn">Previous</button>
+                <button class="next-card" id="next-btn">Next</button>  
+            </div>
+            
         </div>
+    </div>
+        <div class="content-table">
+                <h3>Content</h3>
+                <ul>
+                <li><a href="#conduct-assessment">Conduct a Needs Assessment</a></li>
+                <li><a href="#conduct-mapping">Conduct Resource Mapping</a></li>
+                <li><a href="#action-planning">Embark On Targeted Action Planning</a></li>
+                </ul>
+            </div>
+</div>
+            
     
-    </section>
+</div>
+ 
+        
+
+
       
 
+<!-- Chat Bubble -->
+      <button id="floatingChatButton" class="chat-bubble">💬</button>
 
-    <!-- Footer -->
+<!-- Chat Modal -->
+      <div id="chatModal" class="chat-modal hidden">
+          <div class="chat-header">
+              <span>Ask Us Anything</span>
+              <button id="closeChat" class="close-button">✕</button>
+          </div>
+  
+          <div class="chat-body" id="chatBody">
+              <p id="initialPrompt"><em>Hi! How can we help you today?</em></p>
+          </div>
+  
+          <div class="chat-input">
+              <input type="text" id="chatInput" placeholder="Type a message..." />
+              <button id="sendMessage">Send</button>
+          </div>
+      </div>
+
+<!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -261,7 +257,8 @@
         </div>
     </footer>
 
-    <script>var acc = document.querySelectorAll(".accordion, .item-accordion");
+    <script>
+        var acc = document.querySelectorAll(".accordion, .item-accordion");
         var i;
         for (i = 0; i < acc.length; i++) {
             acc[i].addEventListener("click", function() {
@@ -281,10 +278,92 @@
                         arrow.textContent = "+";
                     }
                 }
-            });
+        });
+        }
+const flashcards = [
+  {
+    front: '<p>1. Create a detailed report with findings, needs, and recommendation </p>',
+    back: '<p>Share it with everyone involved, including the school board, administrators, teachers, parents, and students, for their feedback </p>'
+  },
+  {
+    front: '<p>2. Develop a strategic plan based on the assessment</p>',
+    back: '<p>Your plan should include goals, strategies, action steps, timelines, responsible parties, and measurable outcomes. It should also include a plan for how to effectively sunset any programs you’ve decided to discontinue, making sure there are comparable services in place to minimize any potential negative impacts </p>'
+  },
+  {
+    front: '<p>3. Use SMART goals — those that are specific, measurable, attainable, realistic, relevant, results-oriented, and time-bound.</p>',
+    back: '<p>The strategic plan should also explain how the school or district will use pilot programs or tools in select schools to test their impact, gather user feedback, and make necessary adjustments before wider implementation.</p>'
+  },
+  {
+    //need to make the back cleaner
+    front: '<p>4. Engage stakeholders to better understand and address mental health needs in a school or district.</p>',
+    back: `<p>This process continuously involves students, parents and caregivers, school staff, and community partners. <a href="/client/Journey/stakeholder.html">By involving these key stakeholders</a>, schools can better assess and address the mental health needs of students, ensuring that all voices are heard and all resources are used well.</p> 
+      <ul>
+        <li>Hear students’ voices by using surveys, conducting focus groups, and including students on the task force. Create safe and supportive spaces for students to share their experiences in order to gather honest and useful feedback.</li>
+        <li>Hold town hall meetings and send out surveys to parents and caregivers to gather their concerns and suggestions. Provide resources and information sessions to educate about mental health issues and support systems, encouraging a team effort for student well-being.</li>
+        <li>Include teachers, administrators, and support staff in discussions and surveys. It is important to understand their views on student mental health. Offering professional development on addressing mental health issues equips staff with the skills needed to support students.</li>
+        <li>Work with local mental health organizations, health care providers, and social services.This allows your school or district to gather community-based data and coordinate support. Involving community stakeholders in planning ensures that community resources and expertise are used effectively.</li>
+      </ul>`,
+    isBigBack: true
+  },
+  {
+    front: '<p>5. Research evidence-based mental health programs, tools, and resources that could fill identified gaps.</p>',
+    back: '<p>When evaluating these <a href="/client/Journey/selectSolution.html">external products</a>, consider factors such as cultural relevance, <a href="/client/Journey/fundingStrategy.html">cost</a>, scalability, and ease of <a href="/client/Journey/implementSolution.html">implementation</a>.</p>'
+  },
+  {
+    front: '<p>6. Evaluate new products on a rubric.</p>',
+    back: '<p>Factors to consider for a rubric can include things like cultural relevance, cost, scalability, and ease of implementation. That ensures that any adopted solutions are practical and sustainable.</p>'
+  }
+];
+
+
+        let currentIndex = 0;
+
+        const card = document.getElementById('card');
+        const frontText = document.getElementById('front-text');
+        const backText = document.getElementById('back-text');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        
+        function updateCard(index) {
+            const cardData = flashcards[index];
+            
+            frontText.innerHTML = cardData.front;
+            backText.innerHTML = cardData.back;
+          
+            backText.classList.remove('back-big');
+            
+            if (cardData.isBigBack) {
+              backText.classList.add('back-big');
             }
+          
+            card.classList.remove('flipped');
+          }
+          
+          // Initial display
+          updateCard(currentIndex);
+
+        // flip card
+        card.addEventListener('click', () => {
+        card.classList.toggle('flipped');
+        });
+
+        // Next button 
+        nextBtn.addEventListener('click', () => {
+            card.classList.remove('flipped');
+            currentIndex = (currentIndex + 1) % flashcards.length;
+            updateCard(currentIndex);
+        });
+
+        //Previous button
+        prevBtn.addEventListener('click', () => {
+            card.classList.remove('flipped');
+            currentIndex = (currentIndex - 1 + flashcards.length) % flashcards.length;
+            updateCard(currentIndex);
+        });
+
     </script>
     <script src="{% static 'survey_app/js/index.js' %}" defer></script>
+
 </body>
 <style>
     .section-title {
