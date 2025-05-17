@@ -128,11 +128,11 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Define a directory for collected static files
-
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'survey_app/static'),
+    os.path.join(BASE_DIR, 'survey_app/static')
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Optional, for production
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

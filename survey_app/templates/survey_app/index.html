@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'survey_app/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'survey_app/css/cases.css' %}">
     <title>K-12 Mental Health Tech | Supporting Student Wellbeing</title>
     <link rel="icon" type="image/png" href="{% static 'survey_app/small_hn_logo.png' %}">
 </head>
@@ -52,8 +52,7 @@
 
                         </ul>
                     </li>
-                    
-                    <li><a href="{% url 'index' %}#contact">Contact</a></li>
+
                 </ul>
                 
             </nav>
@@ -110,167 +109,141 @@
 </div>
 
 <!-- DO NOT REMOVE OR MODIFY THE CODE ABOVE -->
-    <!-- Hero Section -->
-    <section class="hero">
-        <!-- <img src="/client/src/logoside.svg" alt="Logo" class="hero-logo"> -->
-        <div class="container">
-            <h1>A guide to choosing and using digital interventions for student well-being</h1>
-            <p>The K-12 Mental Health Tech Navigator is here to help schools and districts choose and use effective digital tools for student mental health and well-being. 
-                Wherever possible, we've included guidance on how to integrate these digital health products into a broader, more comprehensive approach to student mental health. 
-                To get the most from it, we recommend following our digital health product procurement journey.</p>
-            <a href="https://share.hsforms.com/1Ac7n6sLMQWKbnBA7d703TQq6wl6" class="btn" target="_blank" rel="noopener">Join Us</a>
 
-            <a href="#resources" class="btn">About Us</a>
-        </div>
 
-        
-    </section>
-    
-    <!-- Resources Section -->
-    <section class="resources" id="resources">
-        <div class="container">
-            <h2 class="section-heading">Featured Resources</h2>
-            <div class="resources-grid">
-                <div class="resource-card">
-                    <div class="resource-img" style="background-image: url('/api/placeholder/400/200');"></div>
-                    <div class="resource-content">
-                        <h3>Assess student needs</h3>
-                        <p>Assessing a school district’s needs around mental health support for students involves a comprehensive and systematic approach, which is essential to ensuring that students are present, healthy, ready to learn, and prepared for success. </p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="resource-card">
-                    <div class="resource-img" style="background-image: url('/api/placeholder/400/200');"></div>
-                    <div class="resource-content">
-                        <h3>Plan for stakeholder engagment</h3>
-                        <p>As you start using digital mental health tools, it is important to engage key community members including school counselors and community mental health providers. Stakeholders play a pivotal role in assessing student need, selecting products, identifying funding, and putting these tools in place.
-
-                            ‍</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="resource-card">
-                    <div class="resource-img" style="background-image: url('/api/placeholder/400/200');"></div>
-                    <div class="resource-content">
-                        <h3>Select relevant solution</h3>
-                        <p>We have crafted an index of products to provide an example of how districts or schools might compile and evaluate possible products according to a set of criteria.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="resource-card">
-                    <div class="resource-img" style="background-image: url('/api/placeholder/400/200');"></div>
-                    <div class="resource-content">
-                        <h3>Develop Funding strategy</h3>
-                        <p>Funding school mental health programs can be challenging when school districts face budgetary constraints and competing priorities for limited funds. Developing a funding strategy that combines both new, existing, and former funding through braiding, blending, and sequencing is crucial.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                
-                <div class="resource-card">
-                    <div class="resource-img" style="background-image: url('/api/placeholder/400/200');"></div>
-                    <div class="resource-content">
-                        <h3>Implement your chosen solution</h3>
-                        <p>Digital well-being products can be an innovative way to supplement the existing programs and supports your district uses to address growing concerns about student well-being.  </p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-          
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <h2 class="section-heading">Get In Touch</h2>
-            <form class="contact-form">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="school">School/Organization</label>
-                    <input type="text" id="school">
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" required></textarea>
-                </div>
-                <button type="submit" class="btn">Send Message</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Chat Bubble -->
-    <button id="floatingChatButton" class="chat-bubble">💬</button>
-
-    <!-- Chat Modal -->
-    <div id="chatModal" class="chat-modal hidden">
-    <div class="chat-header">
-        <span>Ask Us Anything</span>
-        <button id="closeChat" class="close-button">✕</button>
+<!-- Hero Section -->
+<section class="hero" style="background-image: url({% static 'survey_app/images/main_page.jpg' %})">
+    <div class="container">
+        <h1>A guide to choosing and using digital interventions for student well-being</h1>
+        <p>The K-12 Mental Health Tech Navigator is here to help schools and districts choose and use effective digital tools for student mental health and well-being. 
+            Wherever possible, we've included guidance on how to integrate these digital health products into a broader, more comprehensive approach to student mental health. 
+            To get the most from it, we recommend following our digital health product procurement journey.</p>
+        <a href="https://share.hsforms.com/1Ac7n6sLMQWKbnBA7d703TQq6wl6" class="btn" target="_blank" rel="noopener">Join Us</a>
+        <a href="{% url 'aboutus' %}" class="btn">About Us</a>
     </div>
-
-    <div class="chat-body" id="chatBody">
-        <p id="initialPrompt"><em>Hi! How can we help you today?</em></p>
-    </div>
-
-    <div class="chat-input">
-        <input type="text" id="chatInput" placeholder="Type a message..." />
-        <button id="sendMessage">Send</button>
-    </div>
-    </div>
+</section>
 
 
-
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>K-12 Mental Health Tech</h3>
-                    <p>Supporting student wellbeing through effective technology solutions.</p>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#aboutus">About Us</a></li>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#resources">Resources</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Resources</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Guides & Toolkits</a></li>
-                        <li><a href="#">Webinars</a></li>
-                        <li><a href="#">Research</a></li>
-                        <li><a href="#">Case Studies</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Connect</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Newsletter</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">LinkedIn</a></li>
-                        <li><a href="#">Email Us</a></li>
-                    </ul>
+<!-- Resources Section -->
+<section class="resources" id="resources">
+    <div class="container">
+        <h2 class="section-heading">Featured Resources</h2>
+        <div class="resources-grid">
+            <div class="resource-card">
+                <div class="resource-img" style="background-image: url('/api/placeholder/400/200');"></div>
+                <div class="resource-content">
+                    <h3>Assess student needs</h3>
+                    <p>Assessing a school district’s needs around mental health support for students involves a comprehensive and systematic approach, which is essential to ensuring that students are present, healthy, ready to learn, and prepared for success. </p>
+                    <a href="#" class="btn">Learn More</a>
                 </div>
             </div>
+            <div class="resource-card">
+                <div class="resource-img" style="background-image: url('/api/placeholder/400/200');"></div>
+                <div class="resource-content">
+                    <h3>Plan for stakeholder engagment</h3>
+                    <p>As you start using digital mental health tools, it is important to engage key community members including school counselors and community mental health providers. Stakeholders play a pivotal role in assessing student need, selecting products, identifying funding, and putting these tools in place.
+
+                        ‍</p>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+            <div class="resource-card">
+                <div class="resource-img" style="background-image: url('/api/placeholder/400/200');"></div>
+                <div class="resource-content">
+                    <h3>Select relevant solution</h3>
+                    <p>We have crafted an index of products to provide an example of how districts or schools might compile and evaluate possible products according to a set of criteria.</p>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+            <div class="resource-card">
+                <div class="resource-img" style="background-image: url('/api/placeholder/400/200');"></div>
+                <div class="resource-content">
+                    <h3>Develop Funding strategy</h3>
+                    <p>Funding school mental health programs can be challenging when school districts face budgetary constraints and competing priorities for limited funds. Developing a funding strategy that combines both new, existing, and former funding through braiding, blending, and sequencing is crucial.</p>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+            
+            <div class="resource-card">
+                <div class="resource-img" style="background-image: url('/api/placeholder/400/200');"></div>
+                <div class="resource-content">
+                    <h3>Implement your chosen solution</h3>
+                    <p>Digital well-being products can be an innovative way to supplement the existing programs and supports your district uses to address growing concerns about student well-being.  </p>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+      
+        </div>
+    </div>
+</section>
 
 
-            <div class="copyright">
-                <p>&copy; 2025 K-12 Mental Health Tech. All rights reserved.</p>
+<!-- Chat Bubble -->
+<button id="floatingChatButton" class="chat-bubble">💬</button>
+
+<!-- Chat Modal -->
+<div id="chatModal" class="chat-modal hidden">
+<div class="chat-header">
+    <span>Ask Us Anything</span>
+    <button id="closeChat" class="close-button">✕</button>
+</div>
+
+<div class="chat-body" id="chatBody">
+    <p id="initialPrompt"><em>Hi! How can we help you today?</em></p>
+</div>
+
+<div class="chat-input">
+    <input type="text" id="chatInput" placeholder="Type a message../" />
+    <button id="sendMessage">Send</button>
+</div>
+</div>
+
+
+
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>K-12 Mental Health Tech</h3>
+                <p>Supporting student wellbeing through effective technology solutions.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#aboutus">About Us</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                  
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Guides & Toolkits</a></li>
+                    <li><a href="#">Webinars</a></li>
+                    <li><a href="#">Research</a></li>
+                    <li><a href="#">Case Studies</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Connect</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Newsletter</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">Email Us</a></li>
+                </ul>
             </div>
         </div>
-    </footer>
+
+
+        <div class="copyright">
+            <p>&copy; 2025 K-12 Mental Health Tech. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.5/dist/purify.min.js"></script>
     <script src="{% static 'survey_app/js/index.js' %}" defer></script>
 </body>
