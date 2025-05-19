@@ -128,10 +128,12 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'survey_app/static')
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Optional, for production
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # Default primary key field type
