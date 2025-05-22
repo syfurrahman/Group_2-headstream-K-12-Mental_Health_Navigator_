@@ -1433,20 +1433,10 @@ footer {
   font-size: 12px
  }
  .back.back-big{
-  background-color: #de2d7d;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  transform: rotateY(180deg);
-  position: absolute;
+  transform: rotateY(180deg) translateY(-150px);
   width: 700px;
   height: 500px;
   border-radius: 8px;
-  backface-visibility: hidden;
-  text-align: center;   
-  padding: 18px;
-  font-size: 14px;
   text-align: left;
  }
 

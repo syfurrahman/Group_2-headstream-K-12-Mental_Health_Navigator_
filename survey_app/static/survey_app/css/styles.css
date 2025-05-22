@@ -1397,9 +1397,11 @@ footer {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   cursor: pointer;
 }
+
 .flash-card:hover {
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* stronger shadow on hover */
 }
+
 .front, .back{
   position: absolute;
   width: 100%;
@@ -1409,7 +1411,6 @@ footer {
   text-align: center;   
   padding: 20px;
   font-size: 18px;
-
 }
 .front{
  background-color: #033662;
@@ -1433,20 +1434,10 @@ footer {
   font-size: 12px
  }
  .back.back-big{
-  background-color: #de2d7d;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  transform: rotateY(180deg);
-  position: absolute;
+  transform: rotateY(180deg) translateY(-150px);
   width: 700px;
   height: 500px;
   border-radius: 8px;
-  backface-visibility: hidden;
-  text-align: center;   
-  padding: 18px;
-  font-size: 14px;
   text-align: left;
  }
 
@@ -1480,3 +1471,4 @@ footer {
 .next-card {
   right: -5px;
 }
+
